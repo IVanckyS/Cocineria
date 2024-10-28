@@ -19,6 +19,6 @@ export function handleErrorClient(res, statusCode, message, details= {}) {
 export function handleErrorServer(res, statusCode, message) {
   return res.status(statusCode).json({
     status: "Server error",
-    message,
+    message: "Error interno del servidor",
   });
 }

@@ -14,14 +14,15 @@ export async function getPlatoService() {
     }
 }
 
-export async function createPlatoService(plato) {
+export async function createPlatoService(data) {
     try{
         const menuRepository = AppDataSource.getRepository(MenuSchemna);
         const plato = menuRepository.create(data);
-
-
+        await menuRepository.save(data);
+        return [plato, null];
     }catch{
-
+        console.error("Error al crear plato", error);
+        return [null, "Error al crear plato"];
     }
 
 }
