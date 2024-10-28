@@ -1,24 +1,24 @@
 "use strict";
 
-export function handleSuccess(res, statusCode, message, data = {}) {
-  return res.status(statusCode).json({
+export const handleSuccess = (res, status, message, data = null) => {
+  res.status(status).json({
     status: "Success",
     message,
     data,
   });
-}
+};
 
-export function handleErrorClient(res, statusCode, message, details= {}) {
-  return res.status(statusCode).json({
+export const handleErrorClient = (res, status, message, details = null) => {
+  res.status(status).json({
     status: "Client error",
     message,
-    details
+    details,
   });
-}
+};
 
-export function handleErrorServer(res, statusCode, message) {
-  return res.status(statusCode).json({
+export const handleErrorServer = (res, status, message) => {
+  res.status(status).json({
     status: "Server error",
     message,
   });
-}
+};
