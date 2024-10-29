@@ -36,7 +36,10 @@ export async function getIngrediente(req, res) {
 
 export async function createIngrediente(req, res) {
   try {
-    const [ingrediente, error] = await createIngredienteService(req.body);
+    const { nombre, cantidadDisponible, unidadMedida, stockMinimo, precio } = req.body;
+    const ingredienteData = { nombre, cantidadDisponible, unidadMedida, stockMinimo, precio };
+
+    const [ingrediente, error] = await createIngredienteService(ingredienteData);
     if (error) return handleErrorClient(res, 400, error);
     handleSuccess(res, 201, "Ingrediente creado exitosamente", ingrediente);
   } catch (error) {
@@ -47,7 +50,10 @@ export async function createIngrediente(req, res) {
 export async function updateIngrediente(req, res) {
   try {
     const { id } = req.params;
-    const [ingrediente, error] = await updateIngredienteService(id, req.body);
+    const { nombre, cantidadDisponible, unidadMedida, stockMinimo, precio } = req.body;
+    const ingredienteData = { nombre, cantidadDisponible, unidadMedida, stockMinimo, precio };
+
+    const [ingrediente, error] = await updateIngredienteService(id, ingredienteData);
     if (error) return handleErrorClient(res, 404, error);
     handleSuccess(res, 200, "Ingrediente actualizado exitosamente", ingrediente);
   } catch (error) {

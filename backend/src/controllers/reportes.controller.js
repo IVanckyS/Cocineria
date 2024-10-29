@@ -1,25 +1,34 @@
-// src/controllers/reportes.controller.js
-"use strict";
-import { getIngredientesService } from "../services/ingrediente.service.js";
-import { handleErrorClient, handleErrorServer, handleSuccess } from "../handlers/responseHandlers.js";
+// src/controllers/ingrediente.controller.js
 
 export async function generarReporteInventario(req, res) {
   try {
-    const [ingredientes, error] = await getIngredientesService();
-    if (error) return handleErrorClient(res, 404, error);
+    // Obtén todos los ingredientes
+    const ingredientes = await getIngredientes();
 
-    const ingredientesBajos = ingredientes.filter(
-      (ingrediente) => ingrediente.cantidadDisponible <= ingrediente.stockMinimo
+    // Filtra los ingredientes con `cantidadDisponible` inferior a `stockMinimo`
+    const ingredientesBajoStock = ingredientes.filter(ingrediente =>
+      ingrediente.cantidadDisponible < ingrediente.stockMinimo
     );
 
-    const reporte = {
-      totalIngredientes: ingredientes.length,
-      ingredientesBajos,
-      fechaReporte: new Date(),
-    };
+    // Estructura el reporte incluyendo el campo `precio`
+    const reporte = ingredientes.map(ingrediente => ({
+      id: ingrediente.id,
+      nombre: ingrediente.nombre,
+      cantidadDisponible: ingrediente.cantidadDisponible,
+      unidadMedida: ingrediente.unidadMedida,
+      stockMinimo: ingrediente.stockMinimo,
+      precio: ingrediente.precio,
+      estado: ingrediente.cantidadDisponible < ingrediente.stockMinimo ? "Bajo stock" : "En stock"
+    }));
 
-    handleSuccess(res, 200, "Reporte de inventario generado", reporte);
+    res.status(200).json({
+      message: "Reporte de Inventario",
+      totalIngredientes: ingredientes.length,
+      ingredientesBajoStock: ingredientesBajoStock.length,
+      detalles: reporte,
+    });
   } catch (error) {
-    handleErrorServer(res, 500, error.message);
+    console.error("Error al generar el reporte de inventario:", error);
+    res.status(500).json({ error: "Error en el servidor" });
   }
 }

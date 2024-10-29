@@ -1,5 +1,4 @@
 // src/entity/ingrediente.entity.js
-"use strict";
 import { EntitySchema } from "typeorm";
 
 const IngredienteSchema = new EntitySchema({
@@ -13,20 +12,26 @@ const IngredienteSchema = new EntitySchema({
     },
     nombre: {
       type: "varchar",
-      length: 100,
+      length: 255,
       nullable: false,
     },
     cantidadDisponible: {
-      type: "decimal",
+      type: "int",
       nullable: false,
     },
     unidadMedida: {
       type: "varchar",
-      length: 20,
+      length: 50,
       nullable: false,
     },
     stockMinimo: {
+      type: "int",
+      nullable: false,
+    },
+    precio: {
       type: "decimal",
+      precision: 10,
+      scale: 2,
       nullable: false,
     },
     createdAt: {
@@ -41,13 +46,6 @@ const IngredienteSchema = new EntitySchema({
       nullable: false,
     },
   },
-  indices: [
-    {
-      name: "IDX_INGREDIENTE_ID",
-      columns: ["id"],
-      unique: true,
-    },
-  ],
 });
 
 export default IngredienteSchema;

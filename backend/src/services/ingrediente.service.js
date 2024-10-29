@@ -33,7 +33,7 @@ export async function getIngredienteService(id) {
 export async function createIngredienteService(data) {
   try {
     const ingredienteRepository = AppDataSource.getRepository(Ingrediente);
-    const ingrediente = ingredienteRepository.create(data);
+    const ingrediente = ingredienteRepository.create(data); // `data` incluye `precio`
     await ingredienteRepository.save(ingrediente);
     return [ingrediente, null];
   } catch (error) {
@@ -51,7 +51,7 @@ export async function updateIngredienteService(id, data) {
       return [null, "Ingrediente no encontrado"];
     }
 
-    Object.assign(ingrediente, data);
+    Object.assign(ingrediente, data); // Incluye `precio` si está en `data`
     await ingredienteRepository.save(ingrediente);
     return [ingrediente, null];
   } catch (error) {
