@@ -7,6 +7,9 @@ export async function getPlatoService() {
     try {
         const menuRepository = AppDataSource.getRepository(MenuSchemna);
         const platos = await menuRepository.find();
+        if(!platos){
+            return [null, "No existen platos :("];
+        }
         return [platos, null];
     } catch (error) {
         console.error("No existen platos", error);
@@ -25,4 +28,48 @@ export async function createPlatoService(data) {
         return [null, "Error al crear plato"];
     }
 
+}
+
+export async function getPlatoServiceById(id){
+    try{
+        const menuRepository = AppDataSource.getRepository(MenuSchemna);
+        const plato = await menuRepository.findOne(id);
+        if(!plato){
+            return [null, "Este plato no existe"];
+        }
+        return [plato, null];
+    }catch{
+        console.error("Error al obtener plato", error);
+        return [null, "Error al obtener plato"];
+    }
+}
+
+export async function updatePlatoService(id, data){
+    try{
+        const menuRepository = AppDataSource.getRepository(MenuSchemna);
+        const plato = await menuRepository.findOne(id);
+        if(!plato){
+            return [null, "Este plato no existe"];
+        }
+        await menuRepository.update(id, data);
+        return [plato, null];
+    }catch{
+        console.error("Error al actualizar plato", error);
+        return [null, "Error al actualizar plato"];
+    }
+}
+
+export async function deletePlatoService(id){
+    try{
+        const menuRepository = AppDataSource.getRepository(MenuSchemna);
+        const plato = await menuRepository.findOne(id);
+        if(!plato){
+            return [null, "Este plato no existe"];
+        }
+        await menuRepository.delete(id);
+        return [plato, null];
+    }catch{
+        console.error("Error al eliminar plato", error);
+        return [null, "Error al eliminar plato"];
+    }
 }
