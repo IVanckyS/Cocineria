@@ -1,16 +1,19 @@
-// src/controllers/ingrediente.controller.js
+// src/controllers/reportes.controller.js
+"use strict";
+import { getIngredientesService } from "../services/ingrediente.service.js";
 
 export async function generarReporteInventario(req, res) {
   try {
-    // Obtén todos los ingredientes
-    const ingredientes = await getIngredientes();
+    const [ingredientes, error] = await getIngredientesService();
 
-    // Filtra los ingredientes con `cantidadDisponible` inferior a `stockMinimo`
+    if (error || !ingredientes) {
+      return res.status(404).json({ message: "Error al obtener ingredientes para el reporte", error });
+    }
+
     const ingredientesBajoStock = ingredientes.filter(ingrediente =>
       ingrediente.cantidadDisponible < ingrediente.stockMinimo
     );
 
-    // Estructura el reporte incluyendo el campo `precio`
     const reporte = ingredientes.map(ingrediente => ({
       id: ingrediente.id,
       nombre: ingrediente.nombre,

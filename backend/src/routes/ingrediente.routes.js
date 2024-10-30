@@ -1,4 +1,4 @@
-
+// src/routes/ingrediente.routes.js
 "use strict";
 import { Router } from "express";
 import { authenticateJwt } from "../middlewares/authentication.middleware.js";
@@ -14,17 +14,17 @@ import { generarReporteInventario } from "../controllers/reportes.controller.js"
 
 const router = Router();
 
-// Middleware de autenticación y autorización
+// Aplicar middlewares de autenticación y autorización
 router.use(authenticateJwt, isAdmin);
 
-// Rutas CRUD para Ingredientes
-router.get("/", getIngredientes); // Obtener todos los ingredientes
-router.post("/", createIngrediente); // Crear un nuevo ingrediente
-router.get("/:id", getIngrediente); // Obtener un ingrediente por ID
-router.patch("/:id", updateIngrediente); // Actualizar un ingrediente por ID
-router.delete("/:id", deleteIngrediente); // Eliminar un ingrediente por ID
-
-// Ruta para generar el reporte de inventario
+// Ruta para generar el reporte de inventario (DEFINIDA PRIMERO para evitar conflicto)
 router.get("/reporte", generarReporteInventario);
+
+// Rutas CRUD para Ingredientes
+router.get("/", getIngredientes);
+router.post("/", createIngrediente);
+router.get("/:id", getIngrediente);
+router.patch("/:id", updateIngrediente);
+router.delete("/:id", deleteIngrediente);
 
 export default router;

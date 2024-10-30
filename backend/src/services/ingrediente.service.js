@@ -3,6 +3,7 @@
 import { AppDataSource } from "../config/configDb.js";
 import Ingrediente from "../entity/ingrediente.entity.js";
 
+// src/services/ingrediente.service.js
 export async function getIngredientesService() {
   try {
     const ingredienteRepository = AppDataSource.getRepository(Ingrediente);
@@ -13,6 +14,7 @@ export async function getIngredientesService() {
     return [null, "Error al obtener ingredientes"];
   }
 }
+
 
 export async function getIngredienteService(id) {
   try {
