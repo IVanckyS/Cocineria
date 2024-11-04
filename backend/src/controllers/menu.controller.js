@@ -32,7 +32,8 @@ export async function createPlato (req, res) {
 
 export async function getPlatoById (req, res) {
     try{
-        const [plato, error] = await getPlatoServiceById(req.params.id);
+        const { id } = req.params;
+        const [plato, error] = await getPlatoServiceById(id);
         if(error) return handleErrorClient(res, 404, error);
         handleSuccess(res, 202, "El plato es:", plato);
     }catch(error){
