@@ -7,7 +7,7 @@ const PedidoSchema = new EntitySchema({
   columns: {
     id: { type: "int", primary: true, generated: true },
     total: { type: "decimal", precision: 10, scale: 2 },
-    estado: { type: "varchar", length: 50 }, // e.g., "pendiente", "confirmado"
+    estado: { type: "varchar", length: 60 }, // e.g., "pendiente", "confirmado"
     createdAt: { type: "timestamp", default: () => "CURRENT_TIMESTAMP" },
   },
   relations: {
