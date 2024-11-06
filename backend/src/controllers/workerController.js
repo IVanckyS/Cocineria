@@ -20,6 +20,39 @@ export const createWorker = async (req, res) => {
   }
 };
 
+
+export const getWorkerById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const worker = await workerService.getWorkerById(id);
+    
+    if (!worker) {
+      return handleErrorClient(res, 404, "Worker no encontrado");
+    }
+    
+    handleSuccess(res, 200, "Worker encontrado exitosamente", worker);
+  } catch (error) {
+    handleErrorServer(res, 500, error.message);
+  }
+};
+
+export const updateWorker = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const worker = await workerService.updateWorker(id, req.body);
+    
+    if (!worker) {
+      return handleErrorClient(res, 404, "Worker no encontrado");
+    }
+    
+    handleSuccess(res, 200, "Worker actualizado exitosamente", worker);
+  } catch (error) {
+    handleErrorClient(res, 400, error.message);
+  }
+};
+
+
+
 export const deleteWorker = async (req, res) => {
   try {
     const { id } = req.params;

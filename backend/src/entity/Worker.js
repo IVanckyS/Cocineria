@@ -21,9 +21,18 @@ const WorkerSchema = new EntitySchema({
       enum: ["mesero", "cocinero"],
       nullable: false,
     },
-    horario: {
+    diasTrabajo: {
+      type: "simple-array", 
+      nullable: false,
+    },
+    horaInicio: {
       type: "varchar",
-      length: 255,
+      length: 5, 
+      nullable: false,
+    },
+    horaFin: {
+      type: "varchar",
+      length: 5, 
       nullable: false,
     },
     disponibilidad: {

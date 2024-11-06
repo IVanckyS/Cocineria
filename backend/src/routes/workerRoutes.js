@@ -9,7 +9,9 @@ const router = Router();
 router.use(authenticateJwt);
 
 router
-  .get("/", workerController.getWorkers)
-  .post("/", workerController.createWorker)
-  .delete("/:id", authenticateJwt, isAdmin, deleteWorker);
+.get("/", workerController.getWorkers)
+.get("/:id", workerController.getWorkerById)
+.post("/", workerController.createWorker)
+.patch("/:id", authenticateJwt, isAdmin, workerController.updateWorker)
+.delete("/:id", authenticateJwt, isAdmin, workerController.deleteWorker);
 export default router;
