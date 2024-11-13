@@ -1,6 +1,7 @@
 "use-strict"
 
 import { EntitySchema } from "typeorm";
+import Ingrediente from "../entity/ingrediente.entity.js";
 
 const MenuSchemna = new EntitySchema({
     name: "Plato",
@@ -43,7 +44,17 @@ const MenuSchemna = new EntitySchema({
             nullable: false,
         },
     },
-
+    relations: {
+        ingredientes: {
+            type: "many-to-many",
+            target: "Ingrediente",
+            joinTable: {
+                name: "plato_ingrediente",
+                joinColumn: { name: "platoId", referencedColumnName: "id" },
+                inverseJoinColumn: { name: "ingredienteId", referencedColumnName: "id" },
+            },
+        },
+    },
     indices: [
         {
             name: "IDX_PLATO_ID",
