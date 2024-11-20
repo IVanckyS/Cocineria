@@ -7,20 +7,26 @@ const PlatoIngredienteSchema = new EntitySchema({
     name: "PlatoIngrediente",
     tableName: "plato_ingrediente",
     columns: {
+
         platoId: {
             type: "int",
             primary: true,  
         },
+
         ingredienteId: {
             type: "int",
             primary: true, 
         },
+
         cantidadNecesaria: {
             type: "decimal",
             nullable: false,
         },
+
     },
+
     relations: {
+
         plato: {
             type: "many-to-one",
             target: "Plato",
@@ -28,6 +34,7 @@ const PlatoIngredienteSchema = new EntitySchema({
             primary: true,
             nullable: false,
         },
+        
         ingrediente: {
             type: "many-to-one",
             target: "Ingrediente",

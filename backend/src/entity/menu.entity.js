@@ -31,6 +31,12 @@ const MenuSchemna = new EntitySchema({
             nullable: false,
         },
 
+        disponible: {
+            type: "boolean",
+            default: true,
+            nullable: false,
+        },
+
         createdAt: {
             type: "timestamp with time zone",
             default: () => "CURRENT_TIMESTAMP",
@@ -55,6 +61,7 @@ const MenuSchemna = new EntitySchema({
             },
         },
     },
+    
     indices: [
         {
             name: "IDX_PLATO_ID",
