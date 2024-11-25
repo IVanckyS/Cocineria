@@ -13,7 +13,7 @@ const Navbar = () => {
     const logoutSubmit = () => {
         try {
             logout();
-            navigate('/auth'); 
+            navigate('/auth');
         } catch (error) {
             console.error('Error al cerrar sesión:', error);
         }
@@ -31,63 +31,59 @@ const Navbar = () => {
                         <NavLink 
                             to="/home" 
                             className={({ isActive }) => (isActive ? "active" : "")}
+                            onClick={() => setMenuOpen(false)}
                         >
-                            Menú
+                            Inicio
                         </NavLink>
                     </li>
                     <li>
                         <NavLink 
                             to="/menu" 
-                            onClick={() => { 
-                                setMenuOpen(false); 
-                                addActiveClass();
-                            }} 
-                            activeClassName="active"
+                            className={({ isActive }) => (isActive ? "active" : "")}
+                            onClick={() => setMenuOpen(false)}
                         >
                             Menú
                         </NavLink>
                     </li>
                     {userRole === 'administrador' && (
-                    <li>
-                        <NavLink 
-                            to="/users" 
-                            onClick={() => { 
-                                setMenuOpen(false); 
-                                addActiveClass();
-                            }} 
-                            activeClassName="active"
-                        >
-                            Usuarios
-                        </NavLink>
-                    </li>
-                    
-                    <>
-                        <li>
-                            <NavLink 
-                                to="/create-worker" 
-                                className={({ isActive }) => (isActive ? "active" : "")}
-                            >
-                                Crear Trabajador
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink 
-                                to="/workers" 
-                                className={({ isActive }) => (isActive ? "active" : "")}
-                            >
-                                Lista de Trabajadores
-                            </NavLink>
-                        </li>
-                    </>
+                        <>
+                            <li>
+                                <NavLink 
+                                    to="/users" 
+                                    className={({ isActive }) => (isActive ? "active" : "")}
+                                    onClick={() => setMenuOpen(false)}
+                                >
+                                    Usuarios
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink 
+                                    to="/create-worker" 
+                                    className={({ isActive }) => (isActive ? "active" : "")}
+                                    onClick={() => setMenuOpen(false)}
+                                >
+                                    Crear Trabajador
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink 
+                                    to="/workers" 
+                                    className={({ isActive }) => (isActive ? "active" : "")}
+                                    onClick={() => setMenuOpen(false)}
+                                >
+                                    Lista de Trabajadores
+                                </NavLink>
+                            </li>
+                        </>
                     )}
                     <li>
                         <NavLink 
                             to="/auth" 
                             className={({ isActive }) => (isActive ? "active" : "")}
-                            onClick={() => { 
-                                logoutSubmit(); 
-                                setMenuOpen(false); 
-                            }} 
+                            onClick={() => {
+                                logoutSubmit();
+                                setMenuOpen(false);
+                            }}
                         >
                             Cerrar sesión
                         </NavLink>

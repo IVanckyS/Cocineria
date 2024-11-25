@@ -27,8 +27,9 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/home',
-        element: <Home />
+        element: <Home />,
       },
+      
       {
         path: '/users',
         element: (
@@ -36,12 +37,6 @@ const router = createBrowserRouter([
             <Users />
           </ProtectedRoute>
         ),
-    },
-      {
-        path: '/menu',
-        element: <Menu/>
-      },
-    ]
       },
       {
         path: '/create-worker',
@@ -49,7 +44,7 @@ const router = createBrowserRouter([
           <ProtectedRoute allowedRoles={['administrador']}>
             <CreateWorkerPage />
           </ProtectedRoute>
-        ) 
+        ),
       },
       {
         path: '/workers',
@@ -60,12 +55,12 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/edit-worker/:id', 
+        path: '/edit-worker/:id',
         element: (
           <ProtectedRoute allowedRoles={['administrador']}>
             <EditWorkerPage />
           </ProtectedRoute>
-        )
+        ),
       },
       {
         path: '/inventario',
@@ -91,21 +86,24 @@ const router = createBrowserRouter([
         path: '/inventario/editar',
         element: <EditarIngredientePage />,
       },
-      
       {
         path: '/inventario/generar-reporte',
         element: <GenerarReportePage />,
+      },
+      {
+        path: '/menu',
+        element: <Menu />,
       },
     ],
   },
   {
     path: '/auth',
-    element: <Login />
+    element: <Login />,
   },
   {
     path: '/register',
-    element: <Register />
-  }
+    element: <Register />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
