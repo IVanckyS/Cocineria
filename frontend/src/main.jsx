@@ -28,10 +28,10 @@ const router = createBrowserRouter([
         </ProtectedRoute>
         ),
     },
-    {
-      path: '/menu',
-      element: <Menu/>
-    },
+      {
+        path: '/menu',
+        element: <Menu/>
+      },
     ]
   },
   {
