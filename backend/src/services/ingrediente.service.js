@@ -3,11 +3,18 @@
 import { AppDataSource } from "../config/configDb.js";
 import Ingrediente from "../entity/ingrediente.entity.js";
 
-// src/services/ingrediente.service.js
+// Obtener todos los ingredientes, ordenados por `id` de forma ascendente
 export async function getIngredientesService() {
   try {
     const ingredienteRepository = AppDataSource.getRepository(Ingrediente);
-    const ingredientes = await ingredienteRepository.find();
+
+    // Obtener los ingredientes ordenados por `id`
+    const ingredientes = await ingredienteRepository.find({
+      order: {
+        id: "ASC",  // Ordena de forma ascendente por `id`
+      },
+    });
+
     return [ingredientes, null];
   } catch (error) {
     console.error("Error al obtener ingredientes:", error);
@@ -15,7 +22,7 @@ export async function getIngredientesService() {
   }
 }
 
-
+// Obtener un ingrediente por ID
 export async function getIngredienteService(id) {
   try {
     const ingredienteRepository = AppDataSource.getRepository(Ingrediente);
@@ -32,11 +39,29 @@ export async function getIngredienteService(id) {
   }
 }
 
+// Crear un nuevo ingrediente, reciclando IDs eliminados
 export async function createIngredienteService(data) {
   try {
     const ingredienteRepository = AppDataSource.getRepository(Ingrediente);
-    const ingrediente = ingredienteRepository.create(data); // `data` incluye `precio`
+
+    // Buscar el ID más bajo disponible para reciclar
+    const result = await ingredienteRepository.query(`
+      SELECT id + 1 AS next_id
+      FROM ingredientes i
+      WHERE NOT EXISTS (SELECT 1 FROM ingredientes WHERE id = i.id + 1)
+      ORDER BY id
+      LIMIT 1
+    `);
+
+    // Si hay un ID disponible en el "hueco" más bajo, lo usamos. De lo contrario, dejamos que sea automático.
+    if (result.length > 0) {
+      data.id = result[0].next_id;
+    }
+
+    // Crear el ingrediente con el `id` encontrado o el siguiente en la secuencia
+    const ingrediente = ingredienteRepository.create(data);
     await ingredienteRepository.save(ingrediente);
+
     return [ingrediente, null];
   } catch (error) {
     console.error("Error al crear ingrediente:", error);
@@ -44,6 +69,7 @@ export async function createIngredienteService(data) {
   }
 }
 
+// Actualizar un ingrediente existente
 export async function updateIngredienteService(id, data) {
   try {
     const ingredienteRepository = AppDataSource.getRepository(Ingrediente);
@@ -62,6 +88,7 @@ export async function updateIngredienteService(id, data) {
   }
 }
 
+// Eliminar un ingrediente por ID
 export async function deleteIngredienteService(id) {
   try {
     const ingredienteRepository = AppDataSource.getRepository(Ingrediente);

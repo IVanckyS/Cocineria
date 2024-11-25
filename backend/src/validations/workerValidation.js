@@ -1,6 +1,11 @@
 "use strict";
 import Joi from "joi";
+import Joi from "joi";
 
+export const workerSchema = Joi.object({
+  nombre: Joi.string().required(),
+  rol: Joi.string().valid("mesero", "cocinero").required(),
+  horario: Joi.string().required(),
 export const workerBodyValidation = Joi.object({
   nombre: Joi.string()
     .min(3)

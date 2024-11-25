@@ -36,14 +36,11 @@ const IngredienteSchema = new EntitySchema({
     },
     createdAt: {
       type: "timestamp with time zone",
-      default: () => "CURRENT_TIMESTAMP",
-      nullable: false,
+      createDate: true, // Establece automáticamente la fecha de creación
     },
     updatedAt: {
       type: "timestamp with time zone",
-      default: () => "CURRENT_TIMESTAMP",
-      onUpdate: "CURRENT_TIMESTAMP",
-      nullable: false,
+      updateDate: true, // Actualiza automáticamente la fecha de actualización
     },
   },
 });
