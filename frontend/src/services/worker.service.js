@@ -1,43 +1,53 @@
 // src/services/worker.service.js
 import axios from 'axios';
 
+const API_URL = '/workers';
+
 export const getAllWorkers = async () => {
   try {
-    const response = await api.get('/worker');
-    return response.data;
+    const response = await axios.get(API_URL);
+    return response.data; 
   } catch (error) {
+    console.error('Error al obtener trabajadores:', error);
     throw error.response.data;
   }
 };
 
 export const createWorker = async (data) => {
-  const workerRepository = AppDataSource.getRepository(Worker);
-  const worker = workerRepository.create(data);
-  return await workerRepository.save(worker);
+  try {
+    const response = await axios.post(API_URL, data);
+    return response.data; 
+  } catch (error) {
+    console.error('Error al crear trabajador:', error);
+    throw error.response.data;
+  }
 };
 
 export const getWorkerById = async (id) => {
   try {
-    const response = await api.get(`/worker/${id}`);
-    return response.data;
+    const response = await axios.get(`${API_URL}/${id}`);
+    return response.data; 
   } catch (error) {
+    console.error('Error al obtener trabajador por ID:', error);
     throw error.response.data;
   }
 };
 
 export const updateWorker = async (id, data) => {
   try {
-    const response = await api.put(`/worker/${id}`, data);
-    return response.data;
+    const response = await axios.patch(`${API_URL}/${id}`, data);
+    return response.data; 
   } catch (error) {
+    console.error('Error al actualizar trabajador:', error);
     throw error.response.data;
   }
 };
 
 export const deleteWorker = async (id) => {
   try {
-    await api.delete(`/worker/${id}`);
+    await axios.delete(`${API_URL}/${id}`);
   } catch (error) {
+    console.error('Error al eliminar trabajador:', error);
     throw error.response.data;
   }
 };

@@ -1,36 +1,75 @@
-// src/pages/Workers.jsx
-import React, { useState } from 'react';
-import WorkerList from '../components/WorkerList';
-import CreateWorker from '../components/CreateWorker';
-import Popup from '../components/Popup';
-import { useAuth } from '@context/AuthContext';
+import React, { useEffect, useState } from 'react';
+import { getAllWorkers, deleteWorker } from '@services/worker.service'; 
+import { showErrorAlert, showSuccessAlert } from '@helpers/sweetAlert.js'; 
+import { useNavigate } from 'react-router-dom';
 
 const Workers = () => {
-  const { user } = useAuth();
-  const [isEditPopupOpen, setIsEditPopupOpen] = useState(false);
-  const [selectedWorker, setSelectedWorker] = useState(null);
+  const [workers, setWorkers] = useState([]); 
+  const [loading, setLoading] = useState(true); 
+  const [error, setError] = useState(null); 
+  const navigate = useNavigate(); 
 
-  if (user?.rol !== 'administrador') {
-    return <p>No tienes permiso para acceder a esta sección.</p>;
-  }
+  useEffect(() => {
+    const fetchWorkers = async () => {
+      setLoading(true); 
+      try {
+        const response = await getAllWorkers(); 
+        console.log(response); 
+        setWorkers(response); 
+      } catch (err) {
+        setError(err.message); 
+        showErrorAlert('Error al cargar trabajadores', err.message); 
+      } finally {
+        setLoading(false); 
+      }
+    };
 
-  const handleWorkerCreated = () => {
-    
-  };
+    fetchWorkers(); 
+  }, []);
 
-
-  const handleWorkerUpdated = () => {
-   
-    setIsEditPopupOpen(false);
-  };
+  
+  if (loading) return <p>Cargando trabajadores...</p>;
+  
+  
+  if (error) return <p>Error al cargar trabajadores: {error}</p>;
 
   return (
     <div>
-      <CreateWorker onWorkerCreated={handleWorkerCreated} />
-      <WorkerList setSelectedWorker={setSelectedWorker} setIsEditPopupOpen={setIsEditPopupOpen} />
-      <Popup isOpen={isEditPopupOpen} onClose={() => setIsEditPopupOpen(false)} worker={selectedWorker} onWorkerUpdated={handleWorkerUpdated} />
+      <h1>Lista de Trabajadores</h1>
+      <ul>
+        {workers.map((worker) => (
+          <li key={worker.id}>
+            {worker.nombre} - {worker.rol}
+            <button onClick={() => handleUpdateWorker(worker.id)}>
+              {worker.disponibilidad ? 'Desactivar' : 'Activar'}
+            </button>
+            <button onClick={() => handleDeleteWorker(worker.id)}>Eliminar</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
+};
+
+
+const handleUpdateWorker = async (id) => {
+
+  navigate(`/editar-trabajador/${id}`); 
+};
+
+//
+const handleDeleteWorker = async (id) => {
+  const confirmed = window.confirm('¿Estás seguro de que deseas eliminar este trabajador?');
+  if (confirmed) {
+    try {
+      await deleteWorker(id); 
+      showSuccessAlert('¡Eliminado!', 'El trabajador ha sido eliminado correctamente.');
+      
+      setWorkers((prevWorkers) => prevWorkers.filter(worker => worker.id !== id));
+    } catch (error) {
+      showErrorAlert('Error al eliminar', error.message);
+    }
+  }
 };
 
 export default Workers;

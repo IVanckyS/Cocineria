@@ -1,6 +1,7 @@
+// src/hooks/workers/useCreateWorker.jsx
 import { useState } from 'react';
-import { createWorker } from '@services/worker.service.js';
-import { showErrorAlert, showSuccessAlert } from '@helpers/sweetAlert.js';
+import { createWorker } from '@services/worker.service.js'; 
+import { showSuccessAlert, showErrorAlert } from '@helpers/sweetAlert.js';
 
 const useCreateWorker = () => {
   const [loading, setLoading] = useState(false);

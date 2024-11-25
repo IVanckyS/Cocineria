@@ -23,17 +23,6 @@ const Navbar = () => {
         setMenuOpen(!menuOpen);
     };
 
-    const addActiveClass = () => {
-        const links = document.querySelectorAll('.nav-menu ul li a');
-        links.forEach(link => {
-            if (link.getAttribute('href') === location.pathname) {
-                link.classList.add('active');
-            } else {
-                link.classList.remove('active'); // Remover la clase activa de otros enlaces
-            }
-        });
-    };
-
     return (
         <nav className="navbar">
             <div className={`nav-menu ${menuOpen ? 'activado' : ''}`}>
@@ -41,11 +30,7 @@ const Navbar = () => {
                     <li>
                         <NavLink 
                             to="/home" 
-                            onClick={() => { 
-                                setMenuOpen(false); 
-                                addActiveClass();
-                            }} 
-                            activeClassName="active"
+                            className={({ isActive }) => (isActive ? "active" : "")}
                         >
                             Inicio
                         </NavLink>
@@ -55,11 +40,7 @@ const Navbar = () => {
                         <li>
                             <NavLink 
                                 to="/create-worker" 
-                                onClick={() => { 
-                                    setMenuOpen(false); 
-                                    addActiveClass();
-                                }} 
-                                activeClassName="active"
+                                className={({ isActive }) => (isActive ? "active" : "")}
                             >
                                 Crear Trabajador
                             </NavLink>
@@ -67,11 +48,7 @@ const Navbar = () => {
                         <li>
                             <NavLink 
                                 to="/workers" 
-                                onClick={() => { 
-                                    setMenuOpen(false); 
-                                    addActiveClass();
-                                }} 
-                                activeClassName="active"
+                                className={({ isActive }) => (isActive ? "active" : "")}
                             >
                                 Lista de Trabajadores
                             </NavLink>
@@ -81,11 +58,11 @@ const Navbar = () => {
                     <li>
                         <NavLink 
                             to="/auth" 
+                            className={({ isActive }) => (isActive ? "active" : "")}
                             onClick={() => { 
                                 logoutSubmit(); 
                                 setMenuOpen(false); 
                             }} 
-                            activeClassName="active"
                         >
                             Cerrar sesión
                         </NavLink>

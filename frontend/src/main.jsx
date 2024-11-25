@@ -34,9 +34,6 @@ const router = createBrowserRouter([
           <ProtectedRoute allowedRoles={['administrador']}>
             <Users />
           </ProtectedRoute>
-          <ProtectedRoute allowedRoles={['administrador']}>
-            <Users />
-          </ProtectedRoute>
         ),
       },
       {
@@ -48,14 +45,20 @@ const router = createBrowserRouter([
         ) 
       },
       {
+        path: '/workers',
+        element: (
+          <ProtectedRoute allowedRoles={['administrador']}>
+            <Users />
+          </ProtectedRoute>
+        ),
+      },
+      {
         path: '/edit-worker/:id', 
         element: (
           <ProtectedRoute allowedRoles={['administrador']}>
             <EditWorkerPage />
           </ProtectedRoute>
         )
-      }
-    ]
       },
       {
         path: '/inventario',
@@ -81,6 +84,7 @@ const router = createBrowserRouter([
         path: '/inventario/editar',
         element: <EditarIngredientePage />,
       },
+      
       {
         path: '/inventario/generar-reporte',
         element: <GenerarReportePage />,
@@ -93,15 +97,10 @@ const router = createBrowserRouter([
   },
   {
     path: '/register',
-    element: <Register/>
-  }
-]);
     element: <Register />
-  },
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <RouterProvider router={router}/>
-);
   <RouterProvider router={router} />
 );

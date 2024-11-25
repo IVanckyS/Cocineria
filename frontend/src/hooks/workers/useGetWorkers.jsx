@@ -1,3 +1,4 @@
+// src/hooks/workers/useGetWorkers.jsx
 import { useState, useEffect } from 'react';
 import { getAllWorkers } from '@services/worker.service.js';
 
@@ -7,11 +8,14 @@ const useGetWorkers = () => {
   const [error, setError] = useState(null);
 
   const fetchWorkers = async () => {
+    setLoading(true);
     try {
       const data = await getAllWorkers();
-      setWorkers(data);
+      console.log(data); 
+      setWorkers(data); 
     } catch (err) {
-      setError(err);
+      console.error('Error al obtener trabajadores:', err); 
+      setError(err); 
     } finally {
       setLoading(false);
     }
