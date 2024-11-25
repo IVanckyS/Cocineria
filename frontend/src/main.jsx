@@ -6,13 +6,13 @@ import Users from '@pages/Users';
 import Register from '@pages/Register';
 import Error404 from '@pages/Error404';
 import Root from '@pages/Root';
-import GestionarInventarioPage from "@pages/inventario/GestionarInventarioPage"; // Página de Gestión de Inventario
-import CrearIngredientePage from "@pages/inventario/CrearIngredientePage"; // Crear Ingrediente
-import VerIngredientesPage from "@pages/inventario/VerIngredientesPage"; // Ver todos los Ingredientes
-import EliminarIngredientePage from "@pages/inventario/EliminarIngredientePage"; // Eliminar Ingrediente
-import VerIngredientePage from "@pages/inventario/VerIngredientePage"; // Buscar un Ingrediente por ID
-import EditarIngredientePage from "@pages/inventario/EditarIngredientePage"; // Editar Ingrediente
-import GenerarReportePage from "@pages/inventario/GenerarReportePage"; // Generar Reporte
+import GestionarInventarioPage from "@pages/inventario/GestionarInventarioPage";
+import CrearIngredientePage from "@pages/inventario/CrearIngredientePage";
+import VerIngredientesPage from "@pages/inventario/VerIngredientesPage";
+import EliminarIngredientePage from "@pages/inventario/EliminarIngredientePage";
+import VerIngredientePage from "@pages/inventario/VerIngredientePage";
+import EditarIngredientePage from "@pages/inventario/EditarIngredientePage";
+import GenerarReportePage from "@pages/inventario/GenerarReportePage";
 import ProtectedRoute from '@components/ProtectedRoute';
 import '@styles/styles.css';
 
