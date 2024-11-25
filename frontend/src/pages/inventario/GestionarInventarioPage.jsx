@@ -4,7 +4,7 @@ import "@styles/inventario/gestionarInventario.css";
 const GestionarInventarioPage = () => {
   return (
     <div className="inventario-container">
-      <h1 className="inventario-title">Gestión de Inventario</h1>
+      <h1 className="inventario-title">Gestión de Inventario de Ingredientes</h1>
       <p className="inventario-subtitle">Selecciona una opción:</p>
       <div className="inventario-buttons">
         <Link to="/inventario/crear" className="button create-button">

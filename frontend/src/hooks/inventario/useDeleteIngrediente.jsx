@@ -16,7 +16,7 @@ const useDeleteIngrediente = (fetchIngredientes) => {
         return false;
       }
     } catch {
-      showErrorAlert("Error", "Ocurrió un error al eliminar el ingrediente.");
+      showErrorAlert("ERROR", "Ocurrió un error al eliminar el ingrediente.");
       return false;
     }
   };
