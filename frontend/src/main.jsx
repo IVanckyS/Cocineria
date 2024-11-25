@@ -6,6 +6,8 @@ import Users from '@pages/Users';
 import Register from '@pages/Register';
 import Error404 from '@pages/Error404';
 import Root from '@pages/Root';
+import CreateWorkerPage from '@pages/CreateWorkerPage'; 
+import EditWorkerPage from '@pages/EditWorkerPage'; 
 import ProtectedRoute from '@components/ProtectedRoute';
 import '@styles/styles.css';
 
@@ -22,11 +24,27 @@ const router = createBrowserRouter([
       {
         path: '/users',
         element: (
-        <ProtectedRoute allowedRoles={['administrador']}>
-          <Users />
-        </ProtectedRoute>
+          <ProtectedRoute allowedRoles={['administrador']}>
+            <Users />
+          </ProtectedRoute>
         ),
-    }
+      },
+      {
+        path: '/create-worker',
+        element: (
+          <ProtectedRoute allowedRoles={['administrador']}>
+            <CreateWorkerPage />
+          </ProtectedRoute>
+        ) 
+      },
+      {
+        path: '/edit-worker/:id', 
+        element: (
+          <ProtectedRoute allowedRoles={['administrador']}>
+            <EditWorkerPage />
+          </ProtectedRoute>
+        )
+      }
     ]
   },
   {
@@ -37,8 +55,8 @@ const router = createBrowserRouter([
     path: '/register',
     element: <Register/>
   }
-])
+]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <RouterProvider router={router}/>
-)
+);

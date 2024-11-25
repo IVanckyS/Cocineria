@@ -34,8 +34,8 @@ export const workerBodyValidation = Joi.object({
         "Domingo"
       )
     )
-    .min(1)
-    .required()
+    .min(1) 
+    .required() 
     .messages({
       "array.empty": "Debe seleccionar al menos un día de trabajo.",
       "array.min": "Debe seleccionar al menos un día de trabajo.",
@@ -67,25 +67,24 @@ export const workerBodyValidation = Joi.object({
       "boolean.base": "La disponibilidad debe ser un valor booleano.",
     }),
 })
-  .custom((value, helpers) => {
-    
-    const inicio = value.horaInicio.split(':').map(Number);
-    const fin = value.horaFin.split(':').map(Number);
-    
-    const inicioMinutos = inicio[0] * 60 + inicio[1];
-    const finMinutos = fin[0] * 60 + fin[1];
-    
-    if (finMinutos <= inicioMinutos) {
-      return helpers.error('custom.horaFin', {
-        message: 'La hora de fin debe ser posterior a la hora de inicio'
-      });
-    }
-    
-    return value;
-  })
-  .messages({
-    "custom.horaFin": "La hora de fin debe ser posterior a la hora de inicio",
-  });
+.custom((value, helpers) => {
+  const inicio = value.horaInicio.split(':').map(Number);
+  const fin = value.horaFin.split(':').map(Number);
+  
+  const inicioMinutos = inicio[0] * 60 + inicio[1];
+  const finMinutos = fin[0] * 60 + fin[1];
+  
+  if (finMinutos <= inicioMinutos) {
+    return helpers.error('custom.horaFin', {
+      message: 'La hora de fin debe ser posterior a la hora de inicio'
+    });
+  }
+  
+  return value;
+})
+.messages({
+  "custom.horaFin": "La hora de fin debe ser posterior a la hora de inicio",
+});
 
 export const workerQueryValidation = Joi.object({
   id: Joi.number()

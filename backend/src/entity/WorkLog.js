@@ -15,21 +15,21 @@ const WorkLogSchema = new EntitySchema({
     },
     fecha: {
       type: "date",
-      nullable: false,
+      nullable: true,
     },
     horaInicio: {
       type: "varchar",
       length: 5,
-      nullable: false,
+      nullable: true,
     },
     horaFin: {
       type: "varchar",
       length: 5,
-      nullable: false,
+      nullable: true,
     },
     horasTrabajadas: {
       type: "float",
-      nullable: false,
+      nullable: true,
     },
   },
   relations: {

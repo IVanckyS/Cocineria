@@ -23,17 +23,19 @@ const WorkerSchema = new EntitySchema({
     },
     diasTrabajo: {
       type: "simple-array", 
-      nullable: false,
+      nullable: true,
     },
     horaInicio: {
       type: "varchar",
       length: 5, 
       nullable: false,
+      default: "08:00",
     },
     horaFin: {
       type: "varchar",
       length: 5, 
       nullable: false,
+      default: "20:00",
     },
     disponibilidad: {
       type: "boolean",

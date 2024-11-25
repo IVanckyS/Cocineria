@@ -20,17 +20,7 @@ const Navbar = () => {
     };
 
     const toggleMenu = () => {
-        if (!menuOpen) {
-            removeActiveClass();
-        } else {
-            addActiveClass();
-        }
         setMenuOpen(!menuOpen);
-    };
-
-    const removeActiveClass = () => {
-        const activeLinks = document.querySelectorAll('.nav-menu ul li a.active');
-        activeLinks.forEach(link => link.classList.remove('active'));
     };
 
     const addActiveClass = () => {
@@ -38,6 +28,8 @@ const Navbar = () => {
         links.forEach(link => {
             if (link.getAttribute('href') === location.pathname) {
                 link.classList.add('active');
+            } else {
+                link.classList.remove('active'); // Remover la clase activa de otros enlaces
             }
         });
     };
@@ -59,18 +51,32 @@ const Navbar = () => {
                         </NavLink>
                     </li>
                     {userRole === 'administrador' && (
-                    <li>
-                        <NavLink 
-                            to="/users" 
-                            onClick={() => { 
-                                setMenuOpen(false); 
-                                addActiveClass();
-                            }} 
-                            activeClassName="active"
-                        >
-                            Usuarios
-                        </NavLink>
-                    </li>
+                    <>
+                        <li>
+                            <NavLink 
+                                to="/create-worker" 
+                                onClick={() => { 
+                                    setMenuOpen(false); 
+                                    addActiveClass();
+                                }} 
+                                activeClassName="active"
+                            >
+                                Crear Trabajador
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink 
+                                to="/workers" 
+                                onClick={() => { 
+                                    setMenuOpen(false); 
+                                    addActiveClass();
+                                }} 
+                                activeClassName="active"
+                            >
+                                Lista de Trabajadores
+                            </NavLink>
+                        </li>
+                    </>
                     )}
                     <li>
                         <NavLink 
