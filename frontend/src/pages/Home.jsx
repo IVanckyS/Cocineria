@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import { Link } from "react-router-dom";
 import "@styles/home.css";
 
@@ -17,13 +17,3 @@ const Home = () => {
 };
 
 export default Home;
-=======
-const Home = () => {
-  return (
-    <>
-    </>
-  )
-}
-
-export default Home
->>>>>>> db34bb766ab53d556e1a71c381a2f3981588526f
