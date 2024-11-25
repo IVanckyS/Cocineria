@@ -32,10 +32,35 @@ const Navbar = () => {
                             to="/home" 
                             className={({ isActive }) => (isActive ? "active" : "")}
                         >
-                            Inicio
+                            Menú
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink 
+                            to="/menu" 
+                            onClick={() => { 
+                                setMenuOpen(false); 
+                                addActiveClass();
+                            }} 
+                            activeClassName="active"
+                        >
+                            Menú
                         </NavLink>
                     </li>
                     {userRole === 'administrador' && (
+                    <li>
+                        <NavLink 
+                            to="/users" 
+                            onClick={() => { 
+                                setMenuOpen(false); 
+                                addActiveClass();
+                            }} 
+                            activeClassName="active"
+                        >
+                            Usuarios
+                        </NavLink>
+                    </li>
+                    
                     <>
                         <li>
                             <NavLink 

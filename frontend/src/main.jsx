@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from '@pages/Login';
 import Home from '@pages/Home';
+import Menu from '@pages/Menu';
 import Users from '@pages/Users';
 import Register from '@pages/Register';
 import Error404 from '@pages/Error404';
@@ -35,6 +36,12 @@ const router = createBrowserRouter([
             <Users />
           </ProtectedRoute>
         ),
+    },
+      {
+        path: '/menu',
+        element: <Menu/>
+      },
+    ]
       },
       {
         path: '/create-worker',

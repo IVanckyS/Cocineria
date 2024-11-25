@@ -1,5 +1,7 @@
 "use-strict";
 import MenuSchemna from "../entity/menu.entity.js";
+import Ingrediente from "../entity/ingrediente.entity.js";
+import PlatoIngredienteSchema from "../entity/platoingr.entity.js";
 import { AppDataSource } from "../config/configDb.js";
 
 export async function getPlatoService() {
@@ -72,5 +74,35 @@ export async function deletePlatoService(id){
     }catch (error) {
         console.error("Error al eliminar plato", error);
         return [null, "Error al eliminar plato"];
+    }
+}
+
+export async function createPlatoIngredienteService(data) {
+    try {
+        const platoIngredienteRepository = AppDataSource.getRepository(PlatoIngredienteSchema);
+        const menuRepository = AppDataSource.getRepository(MenuSchemna);
+        const ingredienteRepository = AppDataSource.getRepository(Ingrediente);
+
+
+        const plato = await menuRepository.findOne({ where: { id: data.platoId } });
+        if (!plato) {
+            return [null, "El plato no existe"];
+        }
+
+
+        const ingrediente = await ingredienteRepository.findOne({ where: { id: data.ingredienteId } });
+        if (!ingrediente) {
+            return [null, "El ingrediente no existe"];
+        }
+
+
+        const platoIngrediente = platoIngredienteRepository.create(data);
+        await platoIngredienteRepository.save(platoIngrediente);
+
+
+        return [platoIngrediente, null];
+    } catch (error) {
+        console.error("Error al crear la relación plato-ingrediente:", error);
+        return [null, "Error al crear la relación plato-ingrediente"];
     }
 }
