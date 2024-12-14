@@ -1,71 +1,124 @@
+/* Contenedor principal */
 .crear-ingrediente-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background-color: #f8f9fa;
-    height: 100vh;
-  }
-  
-  h1 {
-    font-size: 2rem;
-    color: #343a40;
-    margin-bottom: 20px;
-  }
-  
-  form {
-    width: 100%;
-    max-width: 500px;
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  label {
-    display: block;
-    font-size: 1rem;
-    color: #495057;
-    margin-bottom: 5px;
-  }
-  
-  input {
-    width: 100%;
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-  }
-  
-  button {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 1rem;
-    font-weight: bold;
-    color: #ffffff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
-  }
-  
-  .back-button {
-    margin-top: 10px;
-    background-color: #6c757d;
-  }
-  
-  .back-button:hover {
-    background-color: #5a6268;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.7) url("/src/assets/ingredientes.jpg") center/cover no-repeat;
+  height: 100vh;
+  font-family: 'Montserrat', 'Poppins', sans-serif;
+  box-sizing: border-box;
+}
+
+/* Contenedor del título */
+h1 {
+  font-size: 2.8rem;
+  color: #5a3724; /* Marrón oscuro */
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 25px;
+  background-color: rgba(248, 231, 209, 0.9); /* Beige con transparencia */
+  padding: 15px 40px;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  width: fit-content;
+}
+
+/* Formulario */
+form {
+  width: 100%;
+  max-width: 550px;
+  background-color: rgba(255, 255, 255, 0.9); /* Blanco translúcido */
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  border: 1px solid #ffc107; /* Amarillo */
+}
+
+/* Grupos de formulario */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Etiquetas */
+label {
+  display: block;
+  font-size: 1.1rem;
+  color: #705548; /* Coffee */
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+/* Campos de entrada */
+input,
+select {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #CED4DA; /* Gris claro */
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  background-color: rgba(248, 249, 250, 0.8); /* Fondo claro con transparencia */
+  color: #221212; /* Texto oscuro */
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Campos en foco */
+input:focus,
+select:focus {
+  border-color: #e6a900; /* Amarillo oscuro */
+  outline: none;
+  box-shadow: 0 0 8px rgba(230, 169, 0, 0.5); /* Sombra suave amarilla */
+}
+
+/* Botones */
+button {
+  display: inline-block;
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.9); /* Blanco translúcido */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Botón Crear */
+button.submit-button {
+  background-color: rgba(230, 169, 0, 0.9); /* Amarillo oscuro con transparencia */
+}
+
+button.submit-button:hover {
+  background-color: rgba(179, 132, 0, 0.9); /* Amarillo más oscuro */
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(179, 132, 0, 0.5);
+}
+
+/* Botón Volver */
+button.back-button {
+  background-color: rgba(255, 87, 34, 0.9); /* Naranja oscuro con transparencia */
+  margin-top: 15px;
+}
+
+button.back-button:hover {
+  background-color: rgba(191, 65, 20, 0.9); /* Naranja más intenso */
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(191, 65, 20, 0.5);
+}
+
+/* Placeholder */
+input::placeholder,
+select::placeholder {
+  color: rgba(163, 118, 6, 0.7); /* Gradiente suave */
+  font-style: italic;
+}
+
+/* Fondo del formulario */
+form select option {
+  color: #705548; /* Coffee */
+  background: rgba(255, 255, 255, 0.9); /* Blanco translúcido */
+}

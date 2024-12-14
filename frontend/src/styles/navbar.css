@@ -3,157 +3,78 @@
 	width: 100%;
 	top: 0;
 	left: 0;
-	display: block;
-	background-color: #003366; /*Color de la navbar*/
-	height: 9vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #705548; /* Coffee */
+	height: 12vh; /* Mayor altura para armonía */
 	z-index: 1000;
-	ul {
-		display: flex;
-		justify-content:end;
-		align-items: center;
-		padding: 0 5vw;
-		margin: 0;
-		height: 100%;
-		li {
-			display: flex;
-			align-items: center;
-			padding: 0 60px;
-			position: relative;
-			height: 100%;
-			a {
-				color: white;
-				font-size: 0.9em;
-				text-decoration: none;
-				position: relative;
-				border-bottom: transparent 3px solid;
-				transition: border-color 0.3s ease;
-				padding: 0 10px 3px 10px;
-				box-sizing: border-box;
-			}
-			:not(.active)::before {
-				content: "";
-				position: absolute;
-				bottom: 0;
-				left: 0;
-				width: 100%;
-				height: 3px;
-				background-color: #006edf;
-				transform: scaleX(0);
-				transform-origin: bottom;
-				transition: transform 0.3s ease;
-			}
-			:not(.active):hover::before {
-				animation: heartbeat 5s ease-in-out infinite;
-				transform: scaleX(1);
-			}
-			.active {
-				font-weight: bold;
-				background-color: #eef7ff;
-				color: #002651;
-				margin: 0;
-				padding-bottom: 0;
-				border: 0;
-				height: 100%;
-				line-height: 9.1vh;
-			}
-		}
-	}
+	font-family: "Montserrat", "Poppins", sans-serif;
 }
 
-.hamburger {
-	display: none;
-	flex-direction: column;
-	cursor: pointer;
+.navbar ul {
+	display: flex;
+	gap: 50px; /* Separación uniforme entre los botones */
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	align-items: center;
+}
+
+.navbar ul li {
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+.navbar ul li a {
+	color: #FFF8E8; /* Texto claro */
+	font-size: 1.2rem; /* Tamaño más grande */
+	text-decoration: none;
+	padding: 10px 20px;
+	border-radius: 5px;
+	transition: color 0.3s ease, border-color 0.3s ease;
+	border-bottom: transparent 3px solid;
+	position: relative;
+}
+
+.navbar ul li:not(.active)::before {
+	content: "";
 	position: absolute;
-	top: 25px;
-	right: 20px;
-	z-index: 1001;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 3px;
+	background-color: #FFF8E8; /* Línea animada */
+	transform: scaleX(0);
+	transform-origin: bottom;
+	transition: transform 0.3s ease;
 }
 
-.hamburger .bar {
-	width: 25px;
-	height: 3px;
-	background-color: white;
-	margin: 4px 0;
+.navbar ul li:not(.active):hover::before {
+	transform: scaleX(1);
+}
+
+.navbar ul li:not(.active):hover {
+	color: #FFF8E8; /* Resalta el texto al pasar el mouse */
+}
+
+.navbar ul li.active a {
+	background-color: transparent; /* Sin fondo */
+	color: #FFF8E8; /* Texto claro */
+	font-weight: bold;
+	border-bottom: #FFF8E8 3px solid; /* Línea resaltada en la opción activa */
 }
 
 @media (max-width: 768px) {
-	.nav-menu ul {
-		display: none;
+	.navbar {
+		height: 10vh; /* Ajuste para pantallas pequeñas */
+	}
+	.navbar ul {
 		flex-direction: column;
-		background-color: #003366;
-		position: absolute;
-		top: 9vh;
-		left: 0;
-		width: 100%;
-		text-align: center;
+		gap: 20px;
 	}
-
-	.nav-menu.activado ul {
-		display: flex;
-		background-color: #eef7ff;
-		justify-content: center;
-		padding: 0;
-	}
-
-	.hamburger {
-		display: flex;
-	}
-
-	.nav-menu.activado ul li {
-		padding: 0;
-		width: 100%;
-		height: 60px;
-		a {
-			color: #003366;
-			font-weight: bold;
-			font-size: 0.9em;
-			text-decoration: none;
-			position: relative;
-			border-bottom: none;
-			transition: border-color 0.3s ease;
-			padding-left: 5px;
-			box-sizing: border-box;
-        }
-	}
-}
-
-@media (min-width: 768px) and (max-width: 1024px) {
-	.nav-menu ul {
-		display: none;
-		flex-direction: column;
-		background-color: #003366;
-		position: absolute;
-		top: 9vh;
-		left: 0;
-		width: 100%;
-		text-align: center;
-	}
-	.nav-menu.activado ul {
-		display: flex;
-		background-color: #eef7ff;
-		justify-content: center;
-		padding: 0;
-	}
-
-	.hamburger {
-		display: flex;
-	}
-
-	.nav-menu.activado ul li {
-		padding: 0;
-		width: 100%;
-		height: 60px;
-		a {
-			color: #003366;
-			font-weight: bold;
-			font-size: 0.9em;
-			text-decoration: none;
-			position: relative;
-			border-bottom: none;
-			transition: border-color 0.3s ease;
-			padding-left: 5px;
-			box-sizing: border-box;
-        }
+	.navbar ul li a {
+		font-size: 1rem;
 	}
 }

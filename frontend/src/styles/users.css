@@ -5,12 +5,19 @@
     align-items: center;
     height: 100vh;
     width: 100%;
+    background-color: #FEBEBE; /* Lavender blush */
+    font-family: 'Montserrat', 'Poppins', sans-serif;
 }
 
 .table-container {
     width: 90%;
     max-width: 1400px;
     margin: 0 auto;
+    background-color: #FFF8E8; /* Light background for contrast */
+    border: 2px solid #FF5722; /* Giants orange */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
 }
 
 .top-table {
@@ -21,29 +28,57 @@
 }
 
 .title-table {
-    color: #003366;
+    color: #212121; /* Eerie black */
+    font-weight: bold;
     margin-left: 70px;
+    font-size: 1.5rem;
 }
 
 .filter-actions {
     display: flex;
     gap: 10px;
-    button {
-        background: rgba(255, 255, 255, 0.87);
-        border: #fff;
-        cursor: pointer;
-        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-        
-    }
+}
+
+.filter-actions button {
+    background: #FFC107; /* Amber */
+    color: #212121; /* Eerie black */
+    border: 1px solid #FFC107;
+    cursor: pointer;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 8px 12px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.filter-actions button:hover {
+    background-color: #FFA000; /* Slightly darker Amber */
+    transform: translateY(-2px);
 }
 
 .delete-user-button {
     margin-right: 70px;
+    background-color: #FF5722; /* Giants orange */
+    color: #FFF;
+    border: none;
+    padding: 8px 12px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.delete-user-button:hover {
+    background-color: #E64A19; /* Darker Giants orange */
+    transform: translateY(-2px);
 }
 
 @media (max-width: 767px) {
     .title-table {
         margin: 0;
+        font-size: 1.2rem;
     }
     .top-table {
         display: flex;
@@ -58,10 +93,11 @@
     .filter-actions {
         margin-bottom: 10px;
     }
+
     .table-container {
         margin: 0;
-        width: 352px;
-        height: 500px;
+        width: 100%;
+        padding: 10px;
     }
     .popup {
         width: 350px;

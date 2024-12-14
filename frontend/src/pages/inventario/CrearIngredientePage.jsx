@@ -61,15 +61,21 @@ const CrearIngredientePage = () => {
         </div>
         <div className="form-group">
           <label htmlFor="unidadMedida">Unidad de Medida:</label>
-          <input
-            type="text"
+          <select
             id="unidadMedida"
             name="unidadMedida"
             value={formData.unidadMedida}
             onChange={handleInputChange}
-            placeholder="Ej. kg"
             required
-          />
+          >
+            <option value="" disabled>
+              Selecciona una unidad
+            </option>
+            <option value="kg">kg</option>
+            <option value="litros">litros</option>
+            <option value="gramos">gramos</option>
+            <option value="mililitros">mililitros</option>
+          </select>
         </div>
         <div className="form-group">
           <label htmlFor="stockMinimo">Stock Mínimo:</label>

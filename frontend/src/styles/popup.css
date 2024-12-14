@@ -1,4 +1,4 @@
-.bg{
+.bg {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -9,47 +9,92 @@
     align-items: center;
     justify-content: center;
 }
-.popup{
+
+.popup {
     top: 30px;
     height: 700px;
     width: 600px;
-    background: white;
+    background: #FFF8E8; /* Light background */
     position: relative;
     border-radius: 12px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    font-family: "Montserrat", "Poppins", sans-serif;
 }
-.close{
+
+.close {
     position: absolute;
     margin-top: 20px;
     margin-right: 10px;
     right: 10px;
     cursor: pointer;
-    background-color: white;
-    border: white;
+    background-color: #FFC107; /* Amber */
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
 
+.close:hover {
+    background-color: #E64A19; /* Giants orange hover */
 }
-.title{
-    font-size: 17px;
+
+.title {
+    font-size: 20px;
     font-weight: 700;
+    color: #212121; /* Eerie black */
+    margin-bottom: 20px;
+    text-align: center;
 }
+
 .popup .form {
     padding: 35px;
-    h1 {
-        margin-bottom: 30px;
-    }
-    button {
-        margin-top: 0;
-    }
-    .container_inputs {
-        margin-bottom: 10px;
-    }
-    .tooltip-icon {
-        position: relative;
-        top: 4px;
-        margin-left: 3px;
-        cursor: pointer;
-        display: inline-block;
-    }
-    .tooltip-icon .tooltip-text {
+}
+
+.popup .form h1 {
+    margin-bottom: 30px;
+    font-size: 24px;
+    color: #212121;
+    text-align: center;
+}
+
+.popup .form button {
+    margin-top: 20px;
+    background-color: #FF5722; /* Giants orange */
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.popup .form button:hover {
+    background-color: #E64A19; /* Darker orange */
+    transform: translateY(-2px);
+}
+
+.popup .form .container_inputs {
+    margin-bottom: 10px;
+}
+
+.popup .form .tooltip-icon {
+    position: relative;
+    top: 4px;
+    margin-left: 3px;
+    cursor: pointer;
+    display: inline-block;
+    color: #FF5722; /* Giants orange */
+}
+
+.popup .form .tooltip-icon .tooltip-text {
     visibility: hidden;
     width: 150px;
     background-color: rgba(0, 0, 0, 0.75);
@@ -64,8 +109,9 @@
     left: 105%;
     opacity: 0;
     transition: opacity 0.3s;
-    }
-    .tooltip-icon .tooltip-text::after {
+}
+
+.popup .form .tooltip-icon .tooltip-text::after {
     content: "";
     position: absolute;
     top: 50%;
@@ -74,12 +120,15 @@
     border-width: 5px;
     border-style: solid;
     border-color: transparent rgba(0, 0, 0, 0.75) transparent transparent;
-    }
-    .tooltip-icon:hover .tooltip-text {
+}
+
+.popup .form .tooltip-icon:hover .tooltip-text {
     visibility: visible;
     opacity: 1;
-    }
-    .toggle-password-icon {
-        top: 47.5%;
-    }
+}
+
+.popup .form .toggle-password-icon {
+    top: 47.5%;
+    color: #795548; /* Coffee */
+    cursor: pointer;
 }

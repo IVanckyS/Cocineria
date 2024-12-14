@@ -1,7 +1,7 @@
 @media (max-width: 480px) {
     .form {
         padding-left: 2px;
-		padding-right: 2px;
+        padding-right: 2px;
         width: 90%;
     }
 
@@ -23,213 +23,144 @@
     .form .footerContent {
         font-size: 12px;
     }
-    
+
     .container {
         padding: 0 10px;
     }
-    
+
     .toggle-password-icon {
         width: 20px;
         height: 20px;
     }
 }
 
-
 .form {
-	background-color: #eef7ff; /*Color del formulario*/
-	padding: 7vh;
-	display: flex;
-	flex-direction: column;
-	border-radius: 24px;
-	align-items: center;
-	h1 {
-		color: #003366; /*Color del titulo del formulario*/
-		font-size: 30px;
-		font-weight: bold;
-		margin: 0;
-		margin-bottom: 4vh;
-	}
-	div {
-		width: 100%;
-		display: flex;
-	}
-	label {
-		color: #003366; /*Color label de inputs del formulario*/
-		font-weight: bold;
-		margin-bottom: 0.7vh;
-	}
-	input {
-		display: flex;
-		border: 3px solid #003366; /*Color del borde de inputs del formulario*/
-		border-radius: 12px;
-		padding: 8px 5px;
-		background-repeat: no-repeat;
-		margin-bottom: 0.8vh;
-		background-color: #eef7ff;
-		font-weight: regular;
-		font-size: 16px;
-		color: #003366;
-		border-radius: 12px;
-		background-position: right 10px center;
-		background-size: 25px 25px;
-		box-sizing: border-box;
-	}
-	input::placeholder {
-		color: rgba(0, 51, 102, 0.3);
-		font-weight: light;
-	}
-	input:focus {
-		background-color: rgba(0, 110, 223, 0.14);
-		font-weight: regular;
-	}
-	select {
-		display: flex;
-		border: 3px solid #003366; /*Color del borde de selects del formulario*/
-		border-radius: 12px;
-		padding: 8px 5px;
-		background-repeat: no-repeat;
-		margin-bottom: 0.8vh;
-		background-color: #eef7ff;
-		font-weight: regular;
-		font-size: 16px;
-		color: #003366;
-		border-radius: 12px;
-		background-position: right 30px center;
-		background-size: 25px 25px;
-		box-sizing: border-box;
-		background-image: url('../assets/ChevronDownIcon.svg');
-		background-repeat: no-repeat;
-		background-position: calc(100% - 12px) center;
-		-webkit-appearance: none;
-		-moz-appearance: none;
-		appearance: none;
-	}
-	select::placeholder {
-		color: rgba(0, 51, 102, 0.3);
-		font-weight: light;
-	}
-	select:focus {
-		background-color: rgba(0, 110, 223, 0.14);
-		font-weight: regular;
-	}
-	textarea {
-		display: flex;
-		border: 3px solid #003366; /*Color del borde de textareas del formulario*/
-		border-radius: 12px;
-		padding: 8px 5px;
-		background-repeat: no-repeat;
-		margin-bottom: 0.8vh;
-		background-color: #eef7ff;
-		font-weight: regular;
-		font-size: 16px;
-		color: #003366;
-		border-radius: 12px;
-		background-position: right 10px center;
-		background-size: 25px 25px;
-		box-sizing: border-box;
-	}
-	textarea::placeholder {
-		color: rgba(0, 51, 102, 0.3);
-		font-weight: light;
-	}
-	textarea:focus {
-		background-color: rgba(0, 110, 223, 0.14);
-		font-weight: regular;
-	}
-	button {
-		padding: auto;
-		display: flex;
-		justify-content: center;
-		padding: 1.2vh 0;
-		border-radius: 12px;
-		border: none;
-		width: 100%;
-		background-color: #003366; /*Color del boton del formulario*/
-		color: #eef7ff;
-		font-weight: bold;
-		font-size: 16px;
-		border: 3px solid #003366; /*Color del borde del boton*/
-		margin-top: 10px;
-	}
-	button:hover{
-		border: 3px solid #003366;
-		background-color: #eef7ff;
-		color: #003366;
-		transition: .3s ease-out;
-	}
-	div {
-		display: flex;
-		flex-direction: column;
-		width: 100%;
-	}
-	.footerContent {
-		display: flex;
-		align-items: center;
-		margin-top: 10px;
-	}
+    background-color: #fbeee8; /* Beige cálido */
+    padding: 7vh;
+    display: flex;
+    flex-direction: column;
+    border-radius: 24px;
+    align-items: center;
+    h1 {
+        color: #5a3724; /* Marrón oscuro */
+        font-size: 30px;
+        font-weight: bold;
+        margin: 0;
+        margin-bottom: 4vh;
+    }
+    div {
+        width: 100%;
+        display: flex;
+    }
+    label {
+        color: #5a3724; /* Marrón oscuro */
+        font-weight: bold;
+        margin-bottom: 0.7vh;
+    }
+    input {
+        display: flex;
+        border: 3px solid #795548; /* Café */
+        border-radius: 12px;
+        padding: 8px 5px;
+        margin-bottom: 0.8vh;
+        background-color: #fffaf0; /* Beige claro */
+        font-weight: regular;
+        font-size: 16px;
+        color: #5a3724; /* Marrón oscuro */
+        box-sizing: border-box;
+    }
+    input::placeholder {
+        color: rgba(90, 55, 36, 0.5); /* Marrón claro */
+        font-weight: light;
+    }
+    input:focus {
+        background-color: rgba(251, 238, 232, 0.8);
+    }
+    select {
+        display: flex;
+        border: 3px solid #795548; /* Café */
+        border-radius: 12px;
+        padding: 8px 5px;
+        margin-bottom: 0.8vh;
+        background-color: #fffaf0; /* Beige claro */
+        font-weight: regular;
+        font-size: 16px;
+        color: #5a3724; /* Marrón oscuro */
+        background-image: url('../assets/ChevronDownIcon.svg');
+        background-repeat: no-repeat;
+        background-position: calc(100% - 12px) center;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+    select::placeholder {
+        color: rgba(90, 55, 36, 0.5); /* Marrón claro */
+        font-weight: light;
+    }
+    select:focus {
+        background-color: rgba(251, 238, 232, 0.8);
+    }
+    textarea {
+        border: 3px solid #795548; /* Café */
+        border-radius: 12px;
+        padding: 8px 5px;
+        margin-bottom: 0.8vh;
+        background-color: #fffaf0; /* Beige claro */
+        font-size: 16px;
+        color: #5a3724; /* Marrón oscuro */
+        box-sizing: border-box;
+    }
+    textarea::placeholder {
+        color: rgba(90, 55, 36, 0.5); /* Marrón claro */
+    }
+    textarea:focus {
+        background-color: rgba(251, 238, 232, 0.8);
+    }
+    button {
+        display: flex;
+        justify-content: center;
+        padding: 1.2vh 0;
+        border-radius: 12px;
+        border: none;
+        width: 100%;
+        background-color: #ff5722; /* Naranja */
+        color: #fff; /* Blanco */
+        font-weight: bold;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+    button:hover {
+        background-color: #e64a19; /* Naranja oscuro */
+        transition: 0.3s ease-out;
+    }
+    div {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    .footerContent {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+    }
 }
+
 .form .error-message {
     visibility: hidden;
     height: 20px;
-    color: red;
+    color: #d32f2f; /* Rojo */
     font-size: 13px;
-	padding-left: 5px;
+    padding-left: 5px;
 }
+
 .form .error-message.visible {
     visibility: visible;
 }
 
 .container {
-	height: 100vh;	
-	background: linear-gradient(90deg, #003366, #001a33); /*Color principal para login (gradiente)*/
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-input[type='email'] {
-	background-image: url('../assets/MentionIcon.svg');
-}
-
-input[name='rut'] {
-	background-image: url('../assets/IdentityCardIcon.svg');
-}
-
-input[name='nombreCompleto'] {
-	background-image: url('../assets/PersonIcon.svg');
-}
-
-input[name='rol'] {
-	background-image: url('../assets/PasskeyIcon.svg');
-	
-}
-
-.container_inputs {
-    position: relative;
-    margin-bottom: 5px;
-}
-
-input {
-    padding-right: 40px;
-    width: 100%;
-}
-
-.toggle-password-icon {
-    position: absolute;
-    right: 15px;
-    top: 44%;
-    transform: translateY(-50%);
-    width: 25px;
-    height: 25px;
-    cursor: pointer;
-}
-
-.newPassword span {
-	top: 10px;
-}
-
-.toggle-password-icon img{
-	width: 25px;
-	height: 25px;
-	margin-top: 4px;
+    height: 100vh;
+    background: linear-gradient(90deg, #795548, #5a3724); /* Gradiente marrón */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
