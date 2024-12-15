@@ -77,6 +77,8 @@ export async function deletePlatoService(id){
     }
 }
 
+// Todo lo relacionado a la asignacion de ingredientes a platos se maneja a partir de aqui.
+
 export async function createPlatoIngredienteService(data) {
     try {
         const platoIngredienteRepository = AppDataSource.getRepository(PlatoIngredienteSchema);
@@ -95,14 +97,100 @@ export async function createPlatoIngredienteService(data) {
             return [null, "El ingrediente no existe"];
         }
 
-
         const platoIngrediente = platoIngredienteRepository.create(data);
         await platoIngredienteRepository.save(platoIngrediente);
-
-
+       
         return [platoIngrediente, null];
     } catch (error) {
-        console.error("Error al crear la relación plato-ingrediente:", error);
-        return [null, "Error al crear la relación plato-ingrediente"];
+        console.error("Error asignar el ingrediente:", error);
+        return [null, "Error asignar el ingrediente"];
     }
 }
+
+// Logica de verificacion de disponibilidad de platos
+
+export async function verificarDisponibilidadPlatos() {
+    try {
+        const platoRepository = AppDataSource.getRepository(MenuSchemna);
+        const platoIngredienteRepository = AppDataSource.getRepository(PlatoIngredienteSchema);
+
+        // Obtiene todos los platos
+        const platos = await platoRepository.find();
+
+        for (const plato of platos) {
+            // Obtiene los ingredientes necesarios para este plato con sus relaciones
+            const ingredientesRelacionados = await platoIngredienteRepository.find({
+                where: { plato: { id: plato.id } }, // Filtra por plato
+                relations: ["ingrediente"], // Asegúrate de cargar la relación "ingrediente"
+            });
+
+            // Verifica la disponibilidad de todos los ingredientes necesarios para este plato
+            const disponible = ingredientesRelacionados.every(relacion => {
+                // Verifica que la relación tenga un ingrediente y que su cantidad sea suficiente
+                if (!relacion.ingrediente) {
+                    console.error(`Ingrediente no encontrado para relación: ${JSON.stringify(relacion)}`);
+                    return false;
+                }
+                console.log(relacion.ingrediente.cantidadDisponible);
+                return relacion.ingrediente.cantidadDisponible >= relacion.cantidadNecesaria;
+            });
+
+            // Si el estado de disponibilidad cambia, actualiza el plato
+            if (plato.disponible !== disponible) {
+                plato.disponible = disponible;
+                await platoRepository.save(plato); // Actualiza el plato en la base de datos
+            }
+        }
+
+        return [platos, null];
+    } catch (error) {
+        console.error("Error al verificar disponibilidad de los platos:", error);
+        throw new Error("No se pudo verificar la disponibilidad de los platos.");
+    }
+}
+
+// Para ver las asignaciones de ingredientes a platos
+
+export async function getPlatoIngredienteService(){
+    try{
+        const platoIngredienteRepository = AppDataSource.getRepository(PlatoIngredienteSchema);
+        const platoIngrediente = await platoIngredienteRepository.find();
+        if(platoIngrediente.length === 0){
+            return [null, "No existen asignaciones de ingredientes"];
+        }
+        return [platoIngrediente, null];
+    }catch (error) {
+        console.error("No existen asignaciones de ingredientes", error);
+        return [null, "No existen asignaciones de ingredientes"];
+    }
+}
+// Jajajja si sirve, para actualizar la cantidad necesaria de un ingrediente asignado a un plato
+export async function updatePlatoIngredienteService (platoId, ingredienteId, data){
+    try{
+        const platoIngredienteRepository = AppDataSource.getRepository(PlatoIngredienteSchema);
+        const platoIngrediente = await platoIngredienteRepository.findOne({ where: { platoId, ingredienteId } });
+        if(!platoIngrediente){
+            return [null, "El ingrediente no ha sido asignado a este plato"];
+        }
+        await platoIngredienteRepository.update({ platoId, ingredienteId }, data);
+        return [platoIngrediente, null];
+}catch (error) {
+    console.error("Error al actualizar asignacion de ingredientes", error);
+    return [null, "Error al actualizar asignacion de ingredientes"];
+}}
+
+export async function deletePlatoIngredienteService (platoId, ingredienteId){
+    try{
+        const platoIngredienteRepository = AppDataSource.getRepository(PlatoIngredienteSchema);
+        const platoIngrediente = await platoIngredienteRepository.findOne({ where: { platoId, ingredienteId } });
+        if(!platoIngrediente){
+            return [null, "El ingrediente no ha sido asignado a este plato"];
+        }
+        await platoIngredienteRepository.delete({ platoId, ingredienteId });
+        return [platoIngrediente, null];
+    }catch (error) {
+        console.error("Error al eliminar asignacion de ingredientes", error);
+        return [null, "Error al eliminar asignacion de ingredientes"];
+    }
+}
+
