@@ -1,124 +1,93 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import useEditIngrediente from '@hooks/inventario/useEditIngrediente';
-import useGetIngredienteById from '@hooks/inventario/useGetIngredienteById';
-import '@styles/inventario/editarIngrediente.css';
+import  { useState } from "react";
+import useGetIngredientes from "@hooks/inventario/useGetIngredientes";
+import EditIngredientePopup from "@components/EditIngredientePopup";
+import { deleteIngredienteService } from "@services/ingredientes/deleteIngrediente.service";
+import "@styles/inventario/verIngredientes.css";
+import { deleteDataAlert, showSuccessAlert, showErrorAlert } from "@helpers/sweetAlert.js";
 
-const EditarIngredientePage = () => {
-  const { id } = useParams(); // Obtener ID del ingrediente desde la URL
-  const navigate = useNavigate();
-  const { ingrediente, fetchIngredienteById, loading: loadingIngrediente } = useGetIngredienteById();
-  const { handleEditIngrediente, loading: loadingEdit } = useEditIngrediente();
+const VerIngredientesPage = () => {
+  const { ingredientes, fetchIngredientes, setIngredientes } = useGetIngredientes();
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedIngrediente, setSelectedIngrediente] = useState(null);
 
-  const [formData, setFormData] = useState({
-    nombre: '',
-    cantidadDisponible: '',
-    unidadMedida: '',
-    stockMinimo: '',
-    precio: '',
-  });
-
-  useEffect(() => {
-    fetchIngredienteById(id);
-  }, [id, fetchIngredienteById]);
-
-  useEffect(() => {
-    if (ingrediente) {
-      setFormData({
-        nombre: ingrediente.nombre,
-        cantidadDisponible: ingrediente.cantidadDisponible,
-        unidadMedida: ingrediente.unidadMedida,
-        stockMinimo: ingrediente.stockMinimo,
-        precio: ingrediente.precio,
-      });
-    }
-  }, [ingrediente]);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+  const handleEditClick = (ingrediente) => {
+    setSelectedIngrediente([ingrediente]); // Carga los datos del ingrediente seleccionado
+    setIsPopupOpen(true); // Abre el popup
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const success = await handleEditIngrediente(id, formData);
-    if (success) {
-      navigate('/inventario');
+  const handleDelete = async (id) => {
+    const result = await deleteDataAlert();
+    if (result.isConfirmed) {
+      try {
+        await deleteIngredienteService(id);
+        showSuccessAlert("¡Eliminado!", `Ingrediente con ID ${id} eliminado.`);
+        fetchIngredientes();
+      } catch (err) {
+        console.error(err);
+        showErrorAlert("Error", "No se pudo eliminar el ingrediente.");
+      }
     }
   };
 
-  if (loadingIngrediente) {
-    return <p>Cargando ingrediente...</p>;
-  }
+  const handleUpdate = (updatedIngrediente) => {
+    setIngredientes((prev) =>
+      prev.map((ingrediente) =>
+        ingrediente.id === updatedIngrediente.id ? updatedIngrediente : ingrediente
+      )
+    );
+    fetchIngredientes(); // Recarga los ingredientes
+  };
 
   return (
-    <main className="container">
-      <h1 className="page-title">Editar Ingrediente</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="nombre">Nombre:</label>
-          <input
-            type="text"
-            id="nombre"
-            name="nombre"
-            value={formData.nombre}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="cantidadDisponible">Cantidad Disponible:</label>
-          <input
-            type="number"
-            id="cantidadDisponible"
-            name="cantidadDisponible"
-            value={formData.cantidadDisponible}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="unidadMedida">Unidad de Medida:</label>
-          <input
-            type="text"
-            id="unidadMedida"
-            name="unidadMedida"
-            value={formData.unidadMedida}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="stockMinimo">Stock Mínimo:</label>
-          <input
-            type="number"
-            id="stockMinimo"
-            name="stockMinimo"
-            value={formData.stockMinimo}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="precio">Precio:</label>
-          <input
-            type="number"
-            id="precio"
-            name="precio"
-            value={formData.precio}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <button type="submit" className="submit-button" disabled={loadingEdit}>
-          {loadingEdit ? 'Guardando...' : 'Guardar Cambios'}
-        </button>
-      </form>
+    <main className="ver-ingredientes-container">
+      <h1>Lista de Ingredientes</h1>
+      <table className="ingredientes-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Cantidad</th>
+            <th>Unidad</th>
+            <th>Stock Mínimo</th>
+            <th>Precio</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {ingredientes.map((ingrediente) => (
+            <tr key={ingrediente.id}>
+              <td>{ingrediente.id}</td>
+              <td>{ingrediente.nombre}</td>
+              <td>{ingrediente.cantidadDisponible}</td>
+              <td>{ingrediente.unidadMedida}</td>
+              <td>{ingrediente.stockMinimo}</td>
+              <td>${ingrediente.precio}</td>
+              <td>
+                <button
+                  className="edit-button"
+                  onClick={() => handleEditClick(ingrediente)}
+                >
+                  Editar
+                </button>
+                <button
+                  className="delete-button"
+                  onClick={() => handleDelete(ingrediente.id)}
+                >
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <EditIngredientePopup
+        show={isPopupOpen}
+        setShow={setIsPopupOpen}
+        data={selectedIngrediente}
+        onSubmit={handleUpdate}
+      />
     </main>
   );
 };
 
-export default EditarIngredientePage;
+export default VerIngredientesPage;

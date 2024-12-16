@@ -16,18 +16,10 @@ const GestionarInventarioPage = () => {
           <Link to="/inventario/ver" className="button view-button">
             Ver Ingredientes
           </Link>
-          <Link to="/inventario/eliminar" className="button delete-button">
-            Eliminar Ingrediente
+          <Link to="/inventario/generar-reporte" className="button report-button">
+             Generar Reportes
           </Link>
-          <Link to="/inventario/ver-uno" className="button single-view-button">
-            Ver Ingrediente por ID
-          </Link>
-          <Link to="/inventario/editar" className="button edit-button">
-            Editar Ingrediente
-          </Link>
-          <Link to="/reportes" className="button report-button">
-            Generar Reportes
-          </Link>
+
         </div>
       </div>
     </div>

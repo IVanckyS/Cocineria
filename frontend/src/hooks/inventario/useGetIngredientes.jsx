@@ -3,22 +3,13 @@ import { getIngredientesService } from '@services/ingredientes/getIngredientes.s
 
 const useGetIngredientes = () => {
   const [ingredientes, setIngredientes] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   const fetchIngredientes = async () => {
-    setLoading(true);
     try {
-      const { success, data, message } = await getIngredientesService();
-      if (success) {
-        setIngredientes(data);
-      } else {
-        setError(message);
-      }
-    } catch {
-      setError('Error al cargar los ingredientes.');
-    } finally {
-      setLoading(false);
+      const data = await getIngredientesService();
+      setIngredientes(data);
+    } catch (error) {
+      console.error('Error al obtener los ingredientes:', error);
     }
   };
 
@@ -26,7 +17,7 @@ const useGetIngredientes = () => {
     fetchIngredientes();
   }, []);
 
-  return { ingredientes, loading, error, fetchIngredientes };
+  return { ingredientes, fetchIngredientes, setIngredientes };
 };
 
 export default useGetIngredientes;

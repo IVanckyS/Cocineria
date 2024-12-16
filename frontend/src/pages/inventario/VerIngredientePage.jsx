@@ -1,61 +1,93 @@
-import { useState } from 'react';
-import useGetIngredienteById from '@hooks/inventario/useGetIngredienteById';
-import '@styles/inventario/verIngrediente.css';
+import  { useState } from "react";
+import useGetIngredientes from "@hooks/inventario/useGetIngredientes";
+import EditIngredientePopup from "@components/EditIngredientePopup";
+import { deleteIngredienteService } from "@services/ingredientes/deleteIngrediente.service";
+import "@styles/inventario/verIngredientes.css";
+import { deleteDataAlert, showSuccessAlert, showErrorAlert } from "@helpers/sweetAlert.js";
 
-const VerIngredientePage = () => {
-  const [inputId, setInputId] = useState('');
-  const { ingrediente, loading, error, fetchIngredienteById } = useGetIngredienteById();
+const VerIngredientesPage = () => {
+  const { ingredientes, fetchIngredientes, setIngredientes } = useGetIngredientes();
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedIngrediente, setSelectedIngrediente] = useState(null);
 
-  const handleInputChange = (e) => {
-    const { value } = e.target;
-    if (/^\d*$/.test(value)) {
-      setInputId(value);
+  const handleEditClick = (ingrediente) => {
+    setSelectedIngrediente([ingrediente]); // Carga los datos del ingrediente seleccionado
+    setIsPopupOpen(true); // Abre el popup
+  };
+
+  const handleDelete = async (id) => {
+    const result = await deleteDataAlert();
+    if (result.isConfirmed) {
+      try {
+        await deleteIngredienteService(id);
+        showSuccessAlert("¡Eliminado!", `Ingrediente con ID ${id} eliminado.`);
+        fetchIngredientes();
+      } catch (err) {
+        console.error(err);
+        showErrorAlert("Error", "No se pudo eliminar el ingrediente.");
+      }
     }
   };
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (inputId) {
-      fetchIngredienteById(inputId);
-    } else {
-      alert('Por favor, ingresa un ID válido.');
-    }
+  const handleUpdate = (updatedIngrediente) => {
+    setIngredientes((prev) =>
+      prev.map((ingrediente) =>
+        ingrediente.id === updatedIngrediente.id ? updatedIngrediente : ingrediente
+      )
+    );
+    fetchIngredientes(); // Recarga los ingredientes
   };
 
   return (
-    <div className="ver-ingrediente-container">
-      <h1 className="page-title">Buscar Ingrediente por ID</h1>
-      <form onSubmit={handleSearch} className="search-form">
-        <div className="form-group">
-          <label htmlFor="id">ID del Ingrediente:</label>
-          <input
-            type="number"
-            id="id"
-            name="id"
-            value={inputId}
-            onChange={handleInputChange}
-            placeholder="Ej. 3"
-            required
-          />
-        </div>
-        <button type="submit" className="search-button">Buscar</button>
-      </form>
-
-      {loading && <p className="loading-message">Cargando ingrediente...</p>}
-      {error && <p className="error-message">{error}</p>}
-      {ingrediente && (
-        <div className="ingrediente-details">
-          <h2>Detalles del Ingrediente</h2>
-          <p><strong>ID:</strong> {ingrediente.id}</p>
-          <p><strong>Nombre:</strong> {ingrediente.nombre}</p>
-          <p><strong>Cantidad Disponible:</strong> {ingrediente.cantidadDisponible}</p>
-          <p><strong>Unidad de Medida:</strong> {ingrediente.unidadMedida}</p>
-          <p><strong>Stock Mínimo:</strong> {ingrediente.stockMinimo}</p>
-          <p><strong>Precio:</strong> ${ingrediente.precio}</p>
-        </div>
-      )}
-    </div>
+    <main className="ver-ingredientes-container">
+      <h1>Lista de Ingredientes</h1>
+      <table className="ingredientes-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Cantidad</th>
+            <th>Unidad</th>
+            <th>Stock Mínimo</th>
+            <th>Precio</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {ingredientes.map((ingrediente) => (
+            <tr key={ingrediente.id}>
+              <td>{ingrediente.id}</td>
+              <td>{ingrediente.nombre}</td>
+              <td>{ingrediente.cantidadDisponible}</td>
+              <td>{ingrediente.unidadMedida}</td>
+              <td>{ingrediente.stockMinimo}</td>
+              <td>${ingrediente.precio}</td>
+              <td>
+                <button
+                  className="edit-button"
+                  onClick={() => handleEditClick(ingrediente)}
+                >
+                  Editar
+                </button>
+                <button
+                  className="delete-button"
+                  onClick={() => handleDelete(ingrediente.id)}
+                >
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <EditIngredientePopup
+        show={isPopupOpen}
+        setShow={setIsPopupOpen}
+        data={selectedIngrediente}
+        onSubmit={handleUpdate}
+      />
+    </main>
   );
 };
 
-export default VerIngredientePage;
+export default VerIngredientesPage;

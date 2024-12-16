@@ -1,34 +1,49 @@
-import { useState } from 'react';
-import { editIngredienteService } from '@services/ingredientes/editIngrediente.service.js';
-import { showSuccessAlert, showErrorAlert } from '@helpers/sweetAlert.js';
+import { useState } from "react";
+import { editIngrediente } from "@services/ingredientes/editIngrediente.service";
+import { showErrorAlert, showSuccessAlert } from "@helpers/sweetAlert";
 
-const useEditIngrediente = () => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+const useEditIngrediente = (setIngredientes) => {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [dataIngrediente, setDataIngrediente] = useState(null);
 
-  const handleEditIngrediente = async (id, data) => {
-    setLoading(true);
-    setError(null);
+  // Función para manejar el clic en el botón Editar
+  const handleClickUpdate = (ingrediente) => {
+    setDataIngrediente(ingrediente); // Guarda el ingrediente seleccionado
+    setIsPopupOpen(true); // Abre el popup
+  };
+
+  // Función para manejar la actualización de un ingrediente
+  const handleUpdate = async (updatedData) => {
     try {
-      const { success, message } = await editIngredienteService(id, data);
-      if (success) {
-        showSuccessAlert('Ingrediente Editado', 'El ingrediente ha sido actualizado correctamente.');
-        return true;
-      } else {
-        showErrorAlert('Error', message);
-        return false;
-      }
+      const updatedIngrediente = await editIngrediente(
+        updatedData,
+        updatedData.id
+      );
+
+      showSuccessAlert("¡Actualizado!", "El ingrediente ha sido actualizado.");
+      setIsPopupOpen(false);
+
+      setIngredientes((prev) =>
+        prev.map((ingrediente) =>
+          ingrediente.id === updatedIngrediente.id
+            ? updatedIngrediente
+            : ingrediente
+        )
+      );
     } catch (error) {
-      console.error('Error al editar el ingrediente:', error);
-      setError('Error al editar el ingrediente.');
-      showErrorAlert('Error', 'Ocurrió un error al editar el ingrediente.');
-      return false;
-    } finally {
-      setLoading(false);
+      console.error("Error al actualizar el ingrediente:", error);
+      showErrorAlert("Error", "No se pudo actualizar el ingrediente.");
     }
   };
 
-  return { handleEditIngrediente, loading, error };
+  return {
+    handleUpdate,
+    handleClickUpdate, // Exportamos la función
+    isPopupOpen,
+    setIsPopupOpen,
+    dataIngrediente,
+    setDataIngrediente,
+  };
 };
 
 export default useEditIngrediente;

@@ -1,42 +1,105 @@
-.container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;
-  }
-  
-  .page-title {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  .page-subtitle {
-    font-size: 1.2rem;
-    color: #555;
-    margin-bottom: 20px;
-  }
-  
-  .generate-button {
-    padding: 15px 30px;
-    background-color: #007BFF;
-    color: #fff;
-    font-size: 1rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .generate-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  
-  .generate-button:hover:not(:disabled) {
-    background-color: #0056b3;
-  }
-  
+/* General Container */
+.reporte-container {
+  margin: 80px auto 20px; /* Ajuste para el navbar y margen inferior */
+  padding: 20px;
+  max-width: 1200px;
+  background-color: #ffebee; /* Fondo suave */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-family: 'Poppins', sans-serif; /* Fuente elegante */
+}
+
+/* Título Principal */
+.reporte-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #212121; /* Negro elegante */
+  margin-bottom: 10px;
+}
+
+/* Resumen de Reporte */
+.reporte-summary {
+  display: flex;
+  justify-content: space-between;
+  background: linear-gradient(to right, #705548, #a37606); /* Gradiente */
+  color: white;
+  padding: 15px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.reporte-summary p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Subtítulo */
+.reporte-subtitle {
+  text-align: left;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #795548; /* Coffee */
+  margin-bottom: 10px;
+}
+
+/* Tabla Estilizada */
+.reporte-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reporte-table th, 
+.reporte-table td {
+  border: 1px solid #e0e0e0;
+  padding: 10px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.reporte-table th {
+  background-color: #212121; /* Eerie black */
+  color: #ffebee; /* Lavender blush */
+  font-weight: 600;
+}
+
+.reporte-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.reporte-table tr:hover {
+  background-color: #ffebee; /* Lavender blush */
+  cursor: pointer;
+}
+
+/* Botón de Descargar PDF */
+.download-button {
+  display: block;
+  margin: 20px auto;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background-color: #ff5722; /* Giants orange */
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.download-button:hover {
+  background-color: #ffc107; /* Amber */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.download-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}

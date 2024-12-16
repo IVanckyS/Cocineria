@@ -19,17 +19,19 @@ import GenerarReportePage from "@pages/inventario/GenerarReportePage";
 import ProtectedRoute from '@components/ProtectedRoute';
 import '@styles/styles.css';
 
+// Configuración de rutas
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
     errorElement: <Error404 />,
     children: [
+      // Ruta principal y Home
       {
         path: '/home',
         element: <Home />,
       },
-      
+      // Usuarios protegidos
       {
         path: '/users',
         element: (
@@ -38,6 +40,7 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      // Crear trabajador
       {
         path: '/create-worker',
         element: (
@@ -46,6 +49,7 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      // Lista de trabajadores
       {
         path: '/workers',
         element: (
@@ -54,6 +58,7 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      // Editar trabajador
       {
         path: '/edit-worker/:id',
         element: (
@@ -62,6 +67,7 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      // Rutas del inventario
       {
         path: '/inventario',
         element: <GestionarInventarioPage />,
@@ -86,16 +92,19 @@ const router = createBrowserRouter([
         path: '/inventario/editar',
         element: <EditarIngredientePage />,
       },
+      // Generar reporte
       {
         path: '/inventario/generar-reporte',
         element: <GenerarReportePage />,
       },
+      // Ruta del menú
       {
         path: '/menu',
         element: <Menu />,
       },
     ],
   },
+  // Autenticación
   {
     path: '/auth',
     element: <Login />,
@@ -106,6 +115,7 @@ const router = createBrowserRouter([
   },
 ]);
 
+// Renderización de la aplicación
 ReactDOM.createRoot(document.getElementById('root')).render(
   <RouterProvider router={router} />
 );

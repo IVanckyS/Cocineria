@@ -21,7 +21,7 @@ export const generarReporteRendimiento = async (fechaInicio, fechaFin) => {
     });
 
     const horasTotales = logs.reduce((total, log) => total + log.horasTrabajadas, 0);
-    const diasTrabajados = new Set(logs.map(log => log.fecha.toISOString().split('T')[0])).size;
+    const diasTrabajados = new Set(logs.map(log => log.fecha.toISOString().split("T")[0])).size;
 
     
     const horasEsperadasPorDia = calcularHorasEsperadas(worker.horaInicio, worker.horaFin);
@@ -37,7 +37,7 @@ export const generarReporteRendimiento = async (fechaInicio, fechaFin) => {
       diasTrabajados,
       horasTotales,
       horasEsperadas,
-      rendimiento: rendimiento.toFixed(2) + '%'
+      rendimiento: rendimiento.toFixed(2) + "%"
     };
   }));
 
@@ -45,8 +45,8 @@ export const generarReporteRendimiento = async (fechaInicio, fechaFin) => {
 };
 
 function calcularHorasEsperadas(horaInicio, horaFin) {
-  const [inicioHoras, inicioMinutos] = horaInicio.split(':').map(Number);
-  const [finHoras, finMinutos] = horaFin.split(':').map(Number);
+  const [inicioHoras, inicioMinutos] = horaInicio.split(":").map(Number);
+  const [finHoras, finMinutos] = horaFin.split(":").map(Number);
 
   let diferencia = (finHoras * 60 + finMinutos) - (inicioHoras * 60 + inicioMinutos);
   if (diferencia < 0) diferencia += 24 * 60; 

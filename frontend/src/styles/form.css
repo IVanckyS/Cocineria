@@ -1,166 +1,138 @@
 @media (max-width: 480px) {
     .form {
-        padding-left: 2px;
-        padding-right: 2px;
-        width: 90%;
+      padding-left: 2px;
+      padding-right: 2px;
+      width: 90%;
     }
-
+  
     .form h1 {
-        font-size: 24px;
-        margin-bottom: 2vh;
+      font-size: 24px;
+      margin-bottom: 2vh;
     }
-
+  
     .form input, .form select {
-        padding: 10px;
-        font-size: 14px;
+      padding: 12px;
+      font-size: 16px;
     }
-
+  
     .form button {
-        padding: 10px;
-        font-size: 16px;
+      padding: 12px;
+      font-size: 16px;
     }
-
+  
     .form .footerContent {
-        font-size: 12px;
+      font-size: 12px;
     }
-
+  
     .container {
-        padding: 0 10px;
+      padding: 0 10px;
     }
-
+  
     .toggle-password-icon {
-        width: 20px;
-        height: 20px;
+      width: 20px;
+      height: 20px;
     }
-}
-
-.form {
-    background-color: #fbeee8; /* Beige cálido */
-    padding: 7vh;
+  }
+  
+  .form {
+    background-color: rgba(255, 255, 255, 0.7); /* Fondo transparente */
+    padding: 8vh;
     display: flex;
     flex-direction: column;
     border-radius: 24px;
     align-items: center;
-    h1 {
-        color: #5a3724; /* Marrón oscuro */
-        font-size: 30px;
-        font-weight: bold;
-        margin: 0;
-        margin-bottom: 4vh;
-    }
-    div {
-        width: 100%;
-        display: flex;
-    }
-    label {
-        color: #5a3724; /* Marrón oscuro */
-        font-weight: bold;
-        margin-bottom: 0.7vh;
-    }
-    input {
-        display: flex;
-        border: 3px solid #795548; /* Café */
-        border-radius: 12px;
-        padding: 8px 5px;
-        margin-bottom: 0.8vh;
-        background-color: #fffaf0; /* Beige claro */
-        font-weight: regular;
-        font-size: 16px;
-        color: #5a3724; /* Marrón oscuro */
-        box-sizing: border-box;
-    }
-    input::placeholder {
-        color: rgba(90, 55, 36, 0.5); /* Marrón claro */
-        font-weight: light;
-    }
-    input:focus {
-        background-color: rgba(251, 238, 232, 0.8);
-    }
-    select {
-        display: flex;
-        border: 3px solid #795548; /* Café */
-        border-radius: 12px;
-        padding: 8px 5px;
-        margin-bottom: 0.8vh;
-        background-color: #fffaf0; /* Beige claro */
-        font-weight: regular;
-        font-size: 16px;
-        color: #5a3724; /* Marrón oscuro */
-        background-image: url('../assets/ChevronDownIcon.svg');
-        background-repeat: no-repeat;
-        background-position: calc(100% - 12px) center;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-    }
-    select::placeholder {
-        color: rgba(90, 55, 36, 0.5); /* Marrón claro */
-        font-weight: light;
-    }
-    select:focus {
-        background-color: rgba(251, 238, 232, 0.8);
-    }
-    textarea {
-        border: 3px solid #795548; /* Café */
-        border-radius: 12px;
-        padding: 8px 5px;
-        margin-bottom: 0.8vh;
-        background-color: #fffaf0; /* Beige claro */
-        font-size: 16px;
-        color: #5a3724; /* Marrón oscuro */
-        box-sizing: border-box;
-    }
-    textarea::placeholder {
-        color: rgba(90, 55, 36, 0.5); /* Marrón claro */
-    }
-    textarea:focus {
-        background-color: rgba(251, 238, 232, 0.8);
-    }
-    button {
-        display: flex;
-        justify-content: center;
-        padding: 1.2vh 0;
-        border-radius: 12px;
-        border: none;
-        width: 100%;
-        background-color: #ff5722; /* Naranja */
-        color: #fff; /* Blanco */
-        font-weight: bold;
-        font-size: 16px;
-        margin-top: 10px;
-    }
-    button:hover {
-        background-color: #e64a19; /* Naranja oscuro */
-        transition: 0.3s ease-out;
-    }
-    div {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-    }
-    .footerContent {
-        display: flex;
-        align-items: center;
-        margin-top: 10px;
-    }
-}
-
-.form .error-message {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    backdrop-filter: blur(5px); /* Efecto desenfoque */
+    width: 450px; /* Aumentar el ancho del formulario */
+  }
+  
+  .form h1 {
+    color: #5a3724; /* Marrón oscuro */
+    font-size: 36px; /* Tamaño del título */
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 4vh;
+  }
+  
+  .form input, .form select {
+    display: flex;
+    border: 3px solid #795548; /* Café */
+    border-radius: 12px;
+    padding: 14px 10px; /* Aumentar el tamaño del padding */
+    margin-bottom: 1.2vh;
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo más visible */
+    font-weight: regular;
+    font-size: 18px; /* Tamaño de fuente más grande */
+    color: #5a3724; /* Marrón oscuro */
+    box-sizing: border-box;
+    width: 100%;
+  }
+  
+  .form input::placeholder, .form select::placeholder {
+    color: rgba(90, 55, 36, 0.5); /* Marrón claro */
+    font-weight: light;
+  }
+  
+  .form input:focus, .form select:focus {
+    background-color: rgba(251, 238, 232, 0.8);
+    outline: none;
+    border-color: #ff5722; /* Naranja */
+  }
+  
+  .form button {
+    display: flex;
+    justify-content: center;
+    padding: 1.5vh 0; /* Aumentar el tamaño del botón */
+    border-radius: 12px;
+    border: none;
+    width: 100%;
+    background-color: #ff5722; /* Naranja */
+    color: #fff; /* Blanco */
+    font-weight: bold;
+    font-size: 18px; /* Tamaño de fuente del botón */
+    margin-top: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .form button:hover {
+    background-color: #e64a19; /* Naranja oscuro */
+    transform: scale(1.05);
+  }
+  
+  .container {
+    height: 100vh;
+    background: url('/src/assets/madera.jpg') center/cover no-repeat fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .form .footerContent {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #5a3724;
+  }
+  
+  .toggle-password-icon {
+    position: absolute;
+    right: 15px;
+    top: 35%;
+    cursor: pointer;
+    color: #795548;
+  }
+  
+  .form .error-message {
     visibility: hidden;
     height: 20px;
     color: #d32f2f; /* Rojo */
     font-size: 13px;
     padding-left: 5px;
-}
-
-.form .error-message.visible {
+  }
+  
+  .form .error-message.visible {
     visibility: visible;
-}
-
-.container {
-    height: 100vh;
-    background: linear-gradient(90deg, #795548, #5a3724); /* Gradiente marrón */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+  }
+  
