@@ -14,30 +14,25 @@ const IngredienteSchema = new EntitySchema({
       type: "varchar",
       length: 255,
       nullable: false,
-      default: "Sin nombre",
     },
     cantidadDisponible: {
       type: "int",
       nullable: false,
-      default: 1,
     },
     unidadMedida: {
       type: "varchar",
       length: 50,
       nullable: false,
-      default: "Sin unidad",
     },
     stockMinimo: {
       type: "int",
       nullable: false,
-      default: 1,
     },
     precio: {
       type: "decimal",
       precision: 10,
       scale: 2,
       nullable: false,
-      default: 0,
     },
     createdAt: {
       type: "timestamp with time zone",
