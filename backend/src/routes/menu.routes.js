@@ -11,7 +11,7 @@ import { authenticateJwt } from "../middlewares/authentication.middleware.js";
 import { isAdmin } from "../middlewares/authorization.middleware.js";
 
 const router = Router();
-router.get("/available", getDisponibilidad);
+router.get("/disponible", getDisponibilidad);
 router.get("/", getPlato);
 router.get("/:id", getPlatoById);
 router.use(authenticateJwt, isAdmin);

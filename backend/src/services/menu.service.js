@@ -85,7 +85,6 @@ export async function createPlatoIngredienteService(data) {
         const menuRepository = AppDataSource.getRepository(MenuSchemna);
         const ingredienteRepository = AppDataSource.getRepository(Ingrediente);
 
-
         const plato = await menuRepository.findOne({ where: { id: data.platoId } });
         if (!plato) {
             return [null, "El plato no existe"];
@@ -99,7 +98,6 @@ export async function createPlatoIngredienteService(data) {
 
         const platoIngrediente = platoIngredienteRepository.create(data);
         await platoIngredienteRepository.save(platoIngrediente);
-       
         return [platoIngrediente, null];
     } catch (error) {
         console.error("Error asignar el ingrediente:", error);

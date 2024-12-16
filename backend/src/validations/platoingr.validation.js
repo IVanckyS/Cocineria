@@ -3,6 +3,32 @@ import Joi from "joi";
 
 export const platoingrValidation = Joi.object({ 
 
+    platoId : Joi.number() 
+    .min(1)
+    .integer()
+    .positive()
+    .messages({
+        "number.empty": "El id no debe estar vacio.",
+        "any.required": "El id es obligatorio.",
+        "number.base": "El id debe ser de tipo numérico.",
+        "number.min": "El id debe ser mayor a 0.",
+        "number.integer": "El id debe ser un número entero.",
+        "number.positive": "El id debe ser positivo.",
+    }),
+    
+    ingredienteId: Joi.number()
+    .min(1)
+    .integer()
+    .positive()
+    .messages({
+        "number.empty": "El id no debe estar vacio.",
+        "any.required": "El id es obligatorio.",
+        "number.base": "El id debe ser de tipo numérico.",
+        "number.min": "El id debe ser mayor a 0.",
+        "number.integer": "El id debe ser un número entero.",
+        "number.positive": "El id debe ser positivo.",
+    }),
+
     cantidadNecesaria: Joi.number()
     .min(1)
     .max(5)

@@ -90,10 +90,10 @@ export async function deletePlato (req, res) {
 // Se encarga de asignar un ingrediente a un plato en especifico.
 export async function createPlatoIngrediente (req, res) {
     try{
-
+        console.log(req.body);
         const { error: bodyError } = platoingrValidation.validate(req.body);
+        console.log(bodyError)
         if (bodyError) return handleErrorClient(res, 400, "Error de validacion", bodyError.message);
-
         const { platoId, ingredienteId, cantidadNecesaria } = req.body;
 
         const [platoIngrediente, error] = await createPlatoIngredienteService({
