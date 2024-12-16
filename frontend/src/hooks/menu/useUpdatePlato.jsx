@@ -1,13 +1,9 @@
 import { useState, useEffect } from "react";
 import { getPlatoById, updatePlato } from "@services/menu.service.js";
+import { showSuccessAlert, showErrorAlert } from "@helpers/sweetAlert.js";
 
 export const useUpdatePlato = (id) => {
-
-    const [plato, setPlato] = useState({
-        nombre: "",
-        ingredientesRequeridos: "",
-        valorVenta: "",
-    });
+    const [plato, setPlato] = useState({});
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -27,31 +23,35 @@ export const useUpdatePlato = (id) => {
         fetchPlato();
     }, [id]);
 
-    const handleChange = (e) => {
-        setPlato({
-            ...plato,
-            [e.target.name]: e.target.value,
-        });
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleUpdatePlato = async (data) => {
         setLoading(true);
         try {
-            await updatePlato(id, plato);
-            setLoading(false);
-            setError(null);
+            const { success, message } = await updatePlato(id, data);
+
+            if (success) {
+                showSuccessAlert(
+                    "¡Plato Actualizado!",
+                    "El plato se actualizó correctamente en el sistema."
+                );
+                return true;
+            } else {
+                showErrorAlert(
+                    "Error al Actualizar Plato",
+                    message || "Ocurrió un problema durante la actualización."
+                );
+                return false;
+            }
         } catch (error) {
+            console.error("Error en handleUpdatePlato:", error);
+            showErrorAlert(
+                "Error",
+                "Hubo un problema inesperado al intentar actualizar el plato."
+            );
+            return false;
+        } finally {
             setLoading(false);
-            setError(error);
         }
     };
 
-    return {
-        plato,
-        loading,
-        error,
-        handleChange,
-        handleSubmit,
-    };
+    return { plato, loading, error, handleUpdatePlato };
 }

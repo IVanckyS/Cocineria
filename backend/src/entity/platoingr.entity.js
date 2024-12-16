@@ -10,37 +10,35 @@ const PlatoIngredienteSchema = new EntitySchema({
 
         platoId: {
             type: "int",
-            primary: true,  
+            primary: true,
+            nullable: false,  
         },
 
         ingredienteId: {
             type: "int",
             primary: true, 
+            nullable: false,  
         },
 
         cantidadNecesaria: {
-            type: "decimal",
-            nullable: false,
+            type: "int",
+            nullable: false, 
+            default: 1,
         },
 
     },
 
     relations: {
-
         plato: {
             type: "many-to-one",
-            target: "Plato",
+            target: MenuSchemna,
             joinColumn: { name: "platoId", referencedColumnName: "id" },
-            primary: true,
-            nullable: false,
+            inverseSide: "platoIngredientes", // Relación inversa hacia la entidad Plato
         },
-        
         ingrediente: {
             type: "many-to-one",
-            target: "Ingrediente",
+            target: Ingrediente,
             joinColumn: { name: "ingredienteId", referencedColumnName: "id" },
-            primary: true,
-            nullable: false,
         },
     },
 });

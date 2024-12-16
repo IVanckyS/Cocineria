@@ -21,14 +21,15 @@ export const menuValidation = Joi.object({
     .min(5)
     .max(70)
     .messages({
-        "string.empty": "El nombre del plato no puede estar vacío.",
-        "any.required": "El nombre del plato es obligatorio.",
-        "string.base": "El nombre del plato debe ser de tipo texto.",
-        "string.min": "El nombre del plato debe tener al menos 5 caracteres.",
-        "string.max": "El nombre del plato debe tener como máximo 70 caracteres.",
+        "string.empty": "Los ingredientes requeridos no deben estar vacios.",
+        "any.required": "Los ingredientes requeridos son obligatorios.",
+        "string.base": "Los ingredientes requeridos deben ser de tipo texto.",
+        "string.min": "Los ingredientes requeridos deben tener al menos 5 caracteres.",
+        "string.max": "Los ingredientes requeridos deben tener como máximo 70 caracteres.",
     }),
     valorVenta: Joi.number()
     .min(1)
+    .max(100000)
     .positive()
     .messages({
         "number.empty": "El valor de venta no puede estar vacío.",

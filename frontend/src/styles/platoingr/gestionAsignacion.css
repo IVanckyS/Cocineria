@@ -1,0 +1,78 @@
+.asignacion-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  }
+  
+  .asignacion-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  .asignacion-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .asignacion-card {
+    background-color: #fff;
+    width: 300px;
+    min-height: 180px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+    padding: 20px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .asignacion-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+  }
+  
+  .asignacion-card p {
+    margin: 8px 0;
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.3;
+  }
+  
+  .asignacion-card p strong {
+    color: #333;
+  }
+  
+  @media (max-width: 768px) {
+    .asignacion-list {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .asignacion-card {
+      width: 80%;
+    }
+  }
+  
+  .button.back-button {
+    background-color: #ff5722;
+    color: #ffffff;
+    margin-bottom: 20px;
+    display: inline-block;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 4px;
+  }
+  
+  .button.back-button:hover {
+    background-color: #666;
+  }
